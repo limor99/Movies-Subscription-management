@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+     <!-- for jquery -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     
+    <script>
+      $(document).ready(function(){
+        $('input[type="checkbox"]').click(function(){
+            let checkedPermishion = $(this).val();
+            
+            if(this.checked && (checkedPermishion == 'createSubscriptions' || checkedPermishion == 'updateSubscriptions'
+              || checkedPermishion == 'deleteSubscriptions')){
+                $('input[name="viewSubscriptions"]').prop('checked', true);
+            }
+            else if(this.checked && (checkedPermishion == 'createMovies' || checkedPermishion == 'updateMovies'
+              || checkedPermishion == 'deleteMovies')){
+                $('input[name="viewMovies"]').prop('checked', true);
+            } 
+        });
+      });
+      </script>
+  </head>
+  <body>
+    
+    <h1><%= title %></h1>
+    <%- include ../menu.ejs -%>
+    
+    <a href="/users">All Users</a> &nbsp;  <p>Add User</p> 
+
+    <h2>Add New User  </h2>
+    <div class="container">
+      
+      <form action="/users/update" method="POST">
+        <div><input type="hidden" name="id" value=<%= user.id %>></div>
+        
+        <div class="form-group">
+          <label for="firstName">First Name:</label>
+          <input type="text" class="form-control" id="firstName" name="firstName" value=<%= user.firstName %>>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name:</label>
+          <input type="text" class="form-control" id="lastName" name="lastName" value=<%= user.lastName %>>
+        </div>
+        <div class="form-group">
+          <label for="username">User Name:</label>
+          <input type="text" class="form-control" id="username" name="username" value=<%= user.username %>>
+        </div>
+        <div class="form-group">
+          <label for="sessionTimeOut">Session TimeOut (Minute):</label>
+          <input type="text" class="form-control" id="sessionTimeOut" name="sessionTimeOut" value=<%= user.sessionTimeOut %>>
+        </div>
+        <div class="form-group">
+          <label for="createdDate">Created Date:</label>
+          <input type="text" class="form-control" id="createdDate" name="createdDate" readonly value=<%= user.createdDate %>>
+        </div>
+        <div class="form-group">
+          <label >Permisions:</label><br>
+          <input type="checkbox" name="viewSubscriptions" value="viewSubscriptions" <% if(user.permissions.includes('View Subscriptions')){ %> checked <% } %> >
+          <label for="viewSubscriptions">View Subscriptions</label><br>
+          <input type="checkbox" name="createSubscriptions" value="createSubscriptions"  <% if(user.permissions.includes('Create Subscriptions')) %> checked >
+          <label for="createSubscriptions">Create Subscriptions</label><br>
+          <input type="checkbox" name="deleteSubscriptions" value="deleteSubscriptions" <% if(user.permissions.includes('Delete Subscriptions')){ %> checked <% } %> >
+          <label for="deleteSubscriptions">Delete Subscriptions</label><br>
+          <input type="checkbox" name="updateSubscriptions" value="updateSubscriptions" <% if(user.permissions.includes('Update Subscriptions')){ %> checked <% } %> >
+          <label for="updateSubscriptions">Update Subscriptions</label><br>
+          <input type="checkbox" name="viewMovies" value="viewMovies" <% if(user.permissions.includes('View Movies')){ %> checked <% } %> >
+          <label for="viewMovies">View Movies</label><br>
+          <input type="checkbox" name="createMoies" value="createMovies" <% if(user.permissions.includes('Create Movies')){ %> checked <% } %> >
+          <label for="createMovies">Create Movies</label><br>
+          <input type="checkbox" name="deleteMovies" value="deleteMovies" <% if(user.permissions.includes('Delete Movies')){ %> checked <% } %> >
+          <label for="deleteMovies">Delete Movies</label><br>
+          <input type="checkbox" name="updateMovies" value="updateMovies" <% if(user.permissions.includes('Update Movies')){ %> checked <% } %> >
+          <label for="updateMovies">Update Movies</label><br>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Update</button>
+        
+            <a href="/users">
+              <button type="button" class="btn btn-primary">Cancel</button>
+            </a>
+        
+      </form>
+
+    </div>
+
+  
+  </body>
+</html>

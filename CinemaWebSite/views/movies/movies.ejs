@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <%- include ../menu.ejs -%>
+
+    <%= msg %>
+    <p>all movies</p> &nbsp;
+    <a href="/movies/new">Add Movie</a>
+
+    
+    <% movies.forEach(movie =>{ %>
+    <div class="card" style="width: 28rem;">
+      <div class="card-body">
+        <h5 class="card-title"><%= movie.name %></h5>
+        <p class="card-text">genres: <%= movie.genres %></p>
+        <div class="card-text">
+          <img src="<%= movie.image.medium %>" style="width:5rem"/>
+          <div > subscriptions</div>
+        </div>
+        
+        <a href="/movies/edit/<%= movie._id %>" class="btn btn-primary">Edit</a>
+        <a href="/movies/delete/<%= movie._id %>" class="btn btn-primary">Delete</a>
+      </div>
+    </div>
+    <% }) %>
+
+  </body>
+</html>

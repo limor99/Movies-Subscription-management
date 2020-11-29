@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    
+    <h1><%= title %></h1>
+    <%- include ../menu.ejs -%>
+    <a href="/movies">All Movies</a> &nbsp;  <p>Add Movie</p> 
+
+    <h3>Edit Movie: <%= movie.name %></h3>
+    
+
+    <div class="container">
+      <form action="/movies/update" method="POST">
+        <div><input type="hidden" name="id" value=<%= movie._id %>></div>
+
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" value=<%= movie.name %>>
+        </div>
+        <div class="form-group">
+          <label for="genres">Genres:</label>
+          <input type="text" class="form-control" id="genres" placeholder="Enter genres" name="genres" value=<%= movie.genres %>>
+        </div>
+        <div class="form-group">
+          <label for="imageUrl">Image url:</label>
+          <input type="text" class="form-control" id="imageUrl" placeholder="Enter image url" name="imageUrl" value=<%= movie.image.medium %>>
+        </div>
+        <div class="form-group">
+          <label for="premiered">Premiered:</label>
+          <input type="date" required class="form-control" id="premiered" placeholder="Enter premierd" name="premiered" value=<%= movie.premiered %>>  
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="/movies">
+          <button type="button" class="btn btn-primary">Cancel</button>
+        </a>
+      </form>
+      
+    </div>
+
+
+  </body>
+</html>

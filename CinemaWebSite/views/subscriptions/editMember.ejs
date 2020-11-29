@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <h1><%= title %></h1>
+    <%- include ../menu.ejs -%>
+
+    <a href="/subscriptions">All Members</a> &nbsp;  <p>Add Member</p> 
+
+    <h3>Edit Member: <%= member.name %></h3>
+
+    <div class="container">
+      
+      <form action="/subscriptions/update" method="POST">
+        <div><input type="hidden" name="id" value=<%= member._id %>></div>
+
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" class="form-control" id="name" name="name" value=<%= member.name %>>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="text" class="form-control" id="email" name="email" value=<%= member.email %>>
+        </div>
+        <div class="form-group">
+          <label for="city">City:</label>
+          <input type="text" class="form-control" id="city" name="city" value=<%= member.city %>>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        
+        <a href="/subscriptions">
+          <button type="button" class="btn btn-primary">Cancel</button>
+        </a>
+        
+      </form>
+
+    </div>
+
+
+
+  </body>
+</html>

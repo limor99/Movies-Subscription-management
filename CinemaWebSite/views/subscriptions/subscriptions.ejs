@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <%- include ../menu.ejs -%>
+
+    <p>All Member</p>
+
+    <a href="/subscriptions/new">Add Memeber</a>
+
+    <% members.forEach(member =>{ %>
+      <div class="card" style="width: 28rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%= member.name %></h5>
+          <p class="card-text">Email: <%= member.email %></p>
+          <p class="card-text">City: <%= member.city %></p>
+          <div class="card-text">
+            <div > Mobvie Watched</div>
+          </div>
+          
+          <a href="/subscriptions/edit/<%= member._id %>" class="btn btn-primary">Edit</a>
+          <a href="/subscriptions/delete/<%= member._id %>" class="btn btn-primary">Delete</a>
+        </div>
+      </div>
+      <% }) %>
+  </body>
+</html>

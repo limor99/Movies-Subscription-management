@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    
+    <h1><%= title %></h1>
+    <%- include ../menu.ejs -%>
+    <a href="/movies">All Movies</a> &nbsp;  <p>Add Movie</p> 
+
+    <div class="container">
+      <form action="/movies/new/add" method="POST">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+        </div>
+        <div class="form-group">
+          <label for="genres">Genres:</label>
+          <input type="text" class="form-control" id="genres" placeholder="Enter genres" name="genres">
+        </div>
+        <div class="form-group">
+          <label for="imageUrl">Image url:</label>
+          <input type="text" class="form-control" id="imageUrl" placeholder="Enter image url" name="imageUrl">
+        </div>
+        <div class="form-group">
+          <label for="premiered">Premiered:</label>
+          <input type="date" class="form-control" id="premiered" placeholder="Enter premierd" name="premiered" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="/movies">
+          <button type="button" class="btn btn-primary">Cancel</button>
+        </a>
+      </form>
+      
+    </div>
+
+
+  </body>
+</html>
