@@ -54,13 +54,9 @@ exports.deleteMovie = async function(id){
     }
 
     return data;
-
-
-
 }
 
 
-//fix!!!
 exports.getMovieById = async function(movieId){
     let data = null;
 
@@ -71,7 +67,5 @@ exports.getMovieById = async function(movieId){
     }
 
     return data;
-
-
 }
     

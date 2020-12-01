@@ -6,7 +6,6 @@ exports.addUserPermissionToFile = async function(userPermission){
     let isAdded = false;
     
     try{
-        //let existUsersPermisionsArr = await jsonFile.readFile(permissionsFile);
         let existUsersPermisionsArr = await this.readPermissions();
         newPermisionsArr = [...existUsersPermisionsArr, userPermission]
 
@@ -22,8 +21,6 @@ exports.addUserPermissionToFile = async function(userPermission){
     finally{
         return isAdded;
     }
-    
-
 }
 
 exports.readPermissions = async function(){
@@ -38,10 +35,7 @@ exports.readPermissions = async function(){
     finally{
         return permissions;
     }
-   
-
 }
-
 
 exports.writePermissions = async function(permissions){
     let isWritten = false;
@@ -56,6 +50,5 @@ exports.writePermissions = async function(permissions){
     finally{
         return isWritten;
     }
-   
 
 }

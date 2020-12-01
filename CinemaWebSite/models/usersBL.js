@@ -16,7 +16,6 @@ exports.getUser = async function(user){
     return  returnUser;
 }
  
-
 exports.addNewUser = async function(user){
     let isAdded = false;
     try{
@@ -72,15 +71,12 @@ exports.getAllUsers = async function(){
     //console.table(users);
     //2. read all users's permissions
     let usersPermissions = await permissionDal.readPermissions();
-    //console.table(usersPermissions);
+    
     //3. data shaping
-
     if(users != undefined && usersPermissions != undefined){
         usersData = users.map(user =>{
             let userPermissions = usersPermissions.filter(permission => permission.id === user.id);
-            //console.table(userPermissions[0].permissions)
-            
-             
+
             return {
                 id: user.id,
                 firstName: user.firstName, 
@@ -109,8 +105,6 @@ exports.getUserById = async function(userId){
     }
 
     return user;
-        
-
 }
 
 exports.updateUser = async function(updateUser){
@@ -136,8 +130,7 @@ exports.updateUser = async function(updateUser){
         users[index] = userToUpdate;
         console.table(users);
         isUpdateUser = await userDal.writeUsersToFile(users);
-        //isUpdate = true;
-
+        
         let userPermissionsToUpdate = {
             "id" : updateUser.id,
             "permissions" : updateUser.permissions
@@ -170,10 +163,8 @@ exports.deleteUser = async function(userId){
     let usersPermissions = await permissionDal.readPermissions();
 
     if(usersPermissions != null){
-        //.table(usersPermissions);
         let indexId = usersPermissions.findIndex(p => p.id === userId);
         usersPermissions.splice(indexId, 1);
-        //console.table(usersPermissions);
         isDeletedFromPermissions = await permissionDal.writePermissions(usersPermissions);
     }
     else{

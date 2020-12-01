@@ -5,7 +5,6 @@ const usersFile = path.join(__dirname, '../../dataFiles/users.json');
 exports.addUserToFile = async function(user){
     let isAdded = false;
     try{
-        //let existUsersArr = await jsonFile.readFile(usersFile);
         let existUsersArr = await this.readUsersFromFile();
         newUsersArr = [...existUsersArr, user]
 
@@ -13,7 +12,6 @@ exports.addUserToFile = async function(user){
         if(isWriten){
             isAdded = true;
         }
-        
     }
     catch(err){
         console.log(`An error occured while try to add new user to ${usersFile}: ${err}`);
@@ -35,9 +33,7 @@ exports.readUsersFromFile = async function(){
     finally{
         return users;
     }
-   
-
-}
+    }
 
 exports.writeUsersToFile = async function(users){
     let isWritten = false;
@@ -51,5 +47,4 @@ exports.writeUsersToFile = async function(users){
     finally{
         return isWritten;
     }
-
 }
