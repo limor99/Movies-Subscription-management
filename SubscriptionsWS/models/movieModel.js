@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const MoviesSchema = new Schema({
+const MovieSchema = new Schema({
     name: String,
     genres: [],
     image: {
@@ -12,4 +12,4 @@ const MoviesSchema = new Schema({
     premiered: Date
 })
 
-module.exports = mongoose.model('movies', MoviesSchema)
+module.exports = mongoose.model('movies', MovieSchema)

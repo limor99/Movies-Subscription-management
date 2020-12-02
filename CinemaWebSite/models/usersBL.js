@@ -199,3 +199,29 @@ exports.deleteUser = async function(userId){
     return isDeleted;
     
 }
+
+exports.createAccount = async function(account){
+    let isExistAccount = false; //the account created by the admin (only username)
+    let isUpdatedAccount = false; //username and pwd exist for user
+    try{
+        let userAccount = await User.findOne({username: account.username})
+        
+        if(userAccount != null){
+            isExistAccount = true;
+            await User.findByIdAndUpdate(userAccount._id, account);
+            isUpdatedAccount = true;
+        }
+        
+    }
+    catch(err){
+        console.log(`An error occured while try to add new account: username: ${newAccount.username}, pwd: ${newAccount.pwd}`);
+    }
+    finally{
+        let answer = {
+            "isExistAccount": isExistAccount,
+            "isUpdatedAccount": isUpdatedAccount
+        }
+        return answer;
+    }
+
+}

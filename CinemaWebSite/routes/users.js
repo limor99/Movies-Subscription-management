@@ -167,8 +167,29 @@ router.get('/delete/:id', async function(req, res, next){
 
 
 router.get('/createAccount', function(req, res, next) {
-  res.render('users/createAccount', { data : "Create Account Page"});
+  res.render('users/createAccountPage', { data : "Create Account Page", msg:''});
 });
 
+router.post('/newAccount', async function(req, res, next){
+  let username = req.body.username;
+  let pwd = req.body.pwd;
+
+  let newAccount = {
+    "username": username,
+    "pwd" : pwd  
+  }
+
+  let answer = await usersBl.createAccount(newAccount);
+  if(!answer.isExistAccount){
+    res.render('users/createAccountPage', {data : "Create Account Page", msg: 'This user account doe\'s not exist, please contat the admin'});
+  }
+  else if(answer.isUpdatedAccount){
+    res.render('login', {data : 'Login Page'})
+  }
+  else{
+    res.render('users/createAccountPage', {data : "Create Account Page", msg: 'An error occured, please try again'});
+  }
+
+})
 
 module.exports = router;

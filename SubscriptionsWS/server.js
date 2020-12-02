@@ -14,14 +14,7 @@ app.use(cors());
 app.use('/api/movies', require('./routes/moviesRouter'));
 app.use('/api/members', require('./routes/membersRouter'));
 
-
-/*
-app.get('/', function(req, resp){
-    resp.send("Heee ekko")
-
-})
-*/
+//initialize the db when server starts
 initialBL.initDB();
-//app.get('/', require('./routers/initialRouter'))
 
 app.listen(8000);

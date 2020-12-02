@@ -1,1 +1,1 @@
-[{"id":"5fb23c1e18b8290c245627cc","permissions":["View Subscriptions","View Movies"]},{"id":"5fc357b881b0c21884691a49","permissions":["View Movies"]}]
+[{"id":"5f9a8edef2a3e269a87a2224","permissions":["View Subscriptions", "Create Subscriptions", "Delete Subscriptions", "Update Subscriptions", "View Movies", "Create Movies", "Delete Movies", "Update Movies"]}]
