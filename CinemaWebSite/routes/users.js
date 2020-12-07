@@ -172,11 +172,11 @@ router.get('/createAccount', function(req, res, next) {
 
 router.post('/newAccount', async function(req, res, next){
   let username = req.body.username;
-  let pwd = req.body.pwd;
+  let password = req.body.password;
 
   let newAccount = {
     "username": username,
-    "pwd" : pwd  
+    "password" : password  
   }
 
   let answer = await usersBl.createAccount(newAccount);

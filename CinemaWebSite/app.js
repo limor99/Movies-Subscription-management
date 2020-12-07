@@ -8,7 +8,7 @@ require('./configs/dbConfig');
 require('./authentication/localAuthentication');
 
 const passport = require('passport');
-const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser');
 const session = require('express-session');
 
 var indexRouter = require('./routes/index');
@@ -20,27 +20,27 @@ var subscriptionsRouter = require('./routes/subscriptions');
 
 var app = express();
 
+//app.use(bodyParser.urlencoded({ extended: true }))
+//app.use(bodyParser.json())
+
+//instead of using body parser
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+
+
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true
 }))
 
-
-//app.use(express.urlencoded({ extended: true }))
- 
-//app.use(express.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
- 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+//app.use(express.json());
+//app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 

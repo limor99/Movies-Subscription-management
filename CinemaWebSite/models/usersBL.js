@@ -2,12 +2,23 @@ const User = require('./userModel');
 const userDal = require('../DAL/UserDAL/userFile');
 const permissionDal = require('../DAL/UserDAL/permissionFile');
 
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 exports.getUser = async function(user){
-    console.log("BL")
     let returnUser;
     try{
+        //let hashPwd = await bcrypt.hash(user.password, saltRounds);
         returnUser = await User.findOne({username: user.username});
-        
+        if(returnUser.password){
+            let isSamePsw = await bcrypt.compare(user.password, returnUser.password);
+            if(!isSamePsw){
+                returnUser = null;
+            }
+        }
+        else{
+            returnUser = null;
+        }
     }
     catch(err){
         console.log("An error occured while try to read from DB (user collection): "  + err);
@@ -205,10 +216,17 @@ exports.createAccount = async function(account){
     let isUpdatedAccount = false; //username and pwd exist for user
     try{
         let userAccount = await User.findOne({username: account.username})
+
+        let hashPwd = await bcrypt.hash(account.password, saltRounds);
+
+        let updatedAccount = {
+            username: account.username,
+            password: hashPwd
+        }
         
         if(userAccount != null){
             isExistAccount = true;
-            await User.findByIdAndUpdate(userAccount._id, account);
+            await User.findByIdAndUpdate(userAccount.id, updatedAccount);
             isUpdatedAccount = true;
         }
         

@@ -11,18 +11,23 @@ const User = require('../models/userModel');
 
 passport.use(new LocalStrategy(
     async function(username, password, done){
-        let theUser = {
-            username: username,
-            password: password
+        try{
+            let theUser = {
+                username: username,
+                password: password
+            }
+            
+            let user = await usersBL.getUser(theUser);
+            
+            if(user){
+                return done(null, user);
+            }
+            else{
+                return done(null, false);
+            }
         }
-        console.log("befor BL")
-        let user = await usersBL.getUser(theUser);
-        console.log("after BL")
-        if(user){
-            return done(null, user);
-        }
-        else{
-            return done(null, false);
+        catch(err){
+            done(err);
         }
     }
 ))
