@@ -68,9 +68,12 @@ router.post('/update', async function(req, res, next) {
 
 
   if(answer != null){
+    console.log("inside post update")
     let movies = await moviesBL.getMovies();
     if(movies){
+      console.log("before render")
       res.render('movies/movies', { title : "Movies Page", msg : answer.msg, movies: movies});  
+      console.log("after render")
     }
     else{
       res.send('movie Updated, but an error occured while trying to get all movies');
@@ -82,6 +85,8 @@ router.post('/update', async function(req, res, next) {
     res.send('An error occured while trying to save the movie');
   }
 
+
+  console.log("end post update")
 });
 
 router.get('/delete/:id', async function(req, res, next) {

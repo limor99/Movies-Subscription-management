@@ -16,7 +16,6 @@ passport.use(new LocalStrategy(
                 username: username,
                 password: password
             }
-            
             let user = await usersBL.getUser(theUser);
             
             if(user){
@@ -31,3 +30,13 @@ passport.use(new LocalStrategy(
         }
     }
 ))
+
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+  });
+  
+  passport.deserializeUser(function(id, done) {
+    User.findById(id, function(err, user) {
+      done(err, user);
+    });
+  });

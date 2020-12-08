@@ -20,19 +20,25 @@ var subscriptionsRouter = require('./routes/subscriptions');
 
 var app = express();
 
-//app.use(bodyParser.urlencoded({ extended: true }))
-//app.use(bodyParser.json())
+app.use(cookieParser());
 
 //instead of using body parser
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-
 
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true
 }))
+
+app.use(function(req, res, next) {
+  res.locals.user = req.session.user;
+  next();
+});
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -41,8 +47,9 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 //app.use(express.json());
 //app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -54,13 +61,6 @@ app.use('/subscriptions', subscriptionsRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
-
-app.get('/', function(req, res){
-
-})
-
-app.use(passport.initialize());
 
 // error handler
 app.use(function(err, req, res, next) {

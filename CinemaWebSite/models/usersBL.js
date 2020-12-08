@@ -5,28 +5,44 @@ const permissionDal = require('../DAL/UserDAL/permissionFile');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+/*  get user from DB */
 exports.getUser = async function(user){
     let returnUser;
     try{
-        //let hashPwd = await bcrypt.hash(user.password, saltRounds);
-        returnUser = await User.findOne({username: user.username});
-        if(returnUser.password){
-            let isSamePsw = await bcrypt.compare(user.password, returnUser.password);
-            if(!isSamePsw){
-                returnUser = null;
+        let existUser = await User.findOne({username: user.username});
+/*
+bcrypt.hash(user.password, saltRounds).then(function(hash) {
+    console.log(hash);
+});
+*/
+        if(existUser.password){
+            let isSamePsw = await bcrypt.compare(user.password, existUser.password);
+            if(isSamePsw){
+                returnUser = existUser;
             }
-        }
-        else{
-            returnUser = null;
+            //bcrypt.compare(user.password, existUser.password).then(function(result){
+                //console.log(result);
+               // if(result){
+               //     returnUser = existUser;
+                    
+               // }
+                return returnUser
+           // })
         }
     }
     catch(err){
         console.log("An error occured while try to read from DB (user collection): "  + err);
+        return returnUser
     }
 
-    return  returnUser;
 }
  
+/* add new user to the system 
+    1. add to db
+    2. add to users.json
+    3. add to permissions.json
+*/
+
 exports.addNewUser = async function(user){
     let isAdded = false;
     try{
@@ -58,7 +74,7 @@ exports.addNewUser = async function(user){
                                         {"updateMovies": user.updateMovies}]
                                      }
 */
-let newUserPermisions = { "id": createdUser.id,
+        let newUserPermisions = { "id": createdUser.id,
                                     "permissions": user.permissions
                                      }
         let isNewUserPermissionAddedToFile = await permissionDal.addUserPermissionToFile(newUserPermisions);
@@ -75,9 +91,14 @@ let newUserPermisions = { "id": createdUser.id,
     }
 }
 
+/** get all user with their all data from all sources:
+ * 1. user collection from db
+ * 2. users.json file
+ * 3. permission.json file
+ */
 exports.getAllUsers = async function(){
     let usersData = null;
-    //1. read al users
+    //1. read all users
     let users = await userDal.readUsersFromFile();
     //console.table(users);
     //2. read all users's permissions
@@ -104,6 +125,7 @@ exports.getAllUsers = async function(){
     return usersData;
 }
 
+/** get user by id with all his data */
 exports.getUserById = async function(userId){
     let users = null;
     let user = null;
@@ -118,6 +140,7 @@ exports.getUserById = async function(userId){
     return user;
 }
 
+/** update user with his data in users.json & permissions.json */
 exports.updateUser = async function(updateUser){
     let isUpdate = false;
     let isUpdateUser = false;
@@ -147,6 +170,7 @@ exports.updateUser = async function(updateUser){
             "permissions" : updateUser.permissions
         }
 
+        //2. update the permissions.json
         let usersPermissions = await permissionDal.readPermissions();
         let indexPermossions = usersPermissions.findIndex(per => per.id === userPermissionsToUpdate.id);
         usersPermissions[indexPermossions] = userPermissionsToUpdate;
@@ -165,6 +189,7 @@ exports.updateUser = async function(updateUser){
 
 }
 
+/** delete user from all data source: users.json, permissions.json & user collection in db */
 exports.deleteUser = async function(userId){
     let isDeleted = false;
     let isDeletedFromPermissions = false;
@@ -211,6 +236,9 @@ exports.deleteUser = async function(userId){
     
 }
 
+/** update the user collection. this function is call when user update his password in db for the first time
+ * after the admin create the username 
+ */
 exports.createAccount = async function(account){
     let isExistAccount = false; //the account created by the admin (only username)
     let isUpdatedAccount = false; //username and pwd exist for user
@@ -242,4 +270,19 @@ exports.createAccount = async function(account){
         return answer;
     }
 
+}
+
+/** TODO: not in use???? DELETE */
+/** get user's first name and last name */
+exports.getUserName = async function(userid){
+    let userName;
+    let usersFromFile = await userDal.readUsersFromFile();
+
+    let user = usersFromFile.filter(u => u.id === userid);
+
+    if(user[0]){
+        userName = `${user[0].firstName} ${user[0].lastName}`;
+    }
+
+    return userName;
 }

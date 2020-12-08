@@ -71,12 +71,17 @@ let newUser = {
     let isAdded = await usersBl.addNewUser(newUser);
 
     if(isAdded){
-      res.send('user added')
+      let users = await usersBl.getAllUsers();
+      if(users){
+        res.render('users/users', { title : "All Users Page", users: users});  
+      }
+      else{
+        res.send('user Updated, but an error occured while trying to get all users');
+      }
     }
     else{
       res.send('user not added')
     }
-
   
 });
 
