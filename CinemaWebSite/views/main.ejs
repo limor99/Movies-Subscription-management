@@ -8,8 +8,10 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
 
-    
-    <%- include menu.ejs -%> <%= name %>
-    
+
+    <%- include menu.ejs -%> 
+    <% if(!(user && user.firstName)){ %>
+      Hello <%= name %>
+      <% } %>    
   </body>
 </html>
