@@ -19,7 +19,10 @@
       <a href="/users">User's Managemet</a>&nbsp;
       <a href="/logout">Logout</a>&nbsp;
 
-      Hello <%= user.firstName %> <%= user.lastName %> 
+      <% if(user && user.firstName){ %>
+          Hello <%= user.firstName %> <%= user.lastName %> 
+      <% } %>
+
     </div>
   </body>
 </html>

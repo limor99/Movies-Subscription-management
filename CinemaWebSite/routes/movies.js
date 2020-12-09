@@ -1,3 +1,4 @@
+const { request } = require('express');
 var express = require('express');
 var router = express.Router();
 
@@ -7,7 +8,13 @@ const moviesBL = require('../models/Movies/moviesBL');
 router.get('/', async function(req, res, next) {
   let movies = await moviesBL.getMovies();
   
-  res.render('movies/movies', { title : "Movies Page", msg: '', movies : movies});
+  if(movies){
+    res.render('movies/movies', { title : "Movies Page", msg: '', movies : movies});
+  }
+  else{
+    res.send('An error occured while trying to get all movies');
+  }
+  
 });
 
 
@@ -89,30 +96,6 @@ router.post('/update', async function(req, res, next) {
   console.log("end post update")
 });
 
-router.get('/delete/:id', async function(req, res, next) {
-  let movieId = req.params.id
-  
-  let answer = await moviesBL.deleteMovie(movieId);
-
-
-  if(answer != null){
-    let movies = await moviesBL.getMovies();
-    if(movies){
-      res.render('movies/movies', { title : "Movies Page", msg : answer.msg, movies: movies});  
-    }
-    else{
-      res.send('movie deleted, but an error occured while trying to get all movies');
-    }
-
-  }
-  else{
-    //genereal error
-    res.send('An error occured while trying to delete the movie');
-  }
-
-});
-
-
 router.get('/new', function(req, res, next) {
   res.render('movies/newMovie', { title : "Add Movies Page"});
 });
@@ -145,5 +128,27 @@ router.get('/edit/:id', async function(req, res, next) {
 
 });
 
+router.get('/delete/:id', async function(req, res, next) {
+  let movieId = req.params.id
+  
+  let answer = await moviesBL.deleteMovie(movieId);
+
+
+  if(answer != null){
+    let movies = await moviesBL.getMovies();
+    if(movies){
+      res.render('movies/movies', { title : "Movies Page", msg : answer.msg, movies: movies});  
+    }
+    else{
+      res.send('movie deleted, but an error occured while trying to get all movies');
+    }
+
+  }
+  else{
+    //genereal error
+    res.send('An error occured while trying to delete the movie');
+  }
+
+});
 
 module.exports = router;

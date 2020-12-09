@@ -2,7 +2,7 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <% console.log("before css") %>
   </head>
   <body>
     <h1><%= title %></h1>
@@ -29,6 +29,7 @@
       </div>
     </div>
     <% }) %>
+    <% console.log("outside for each") %>
 
   </body>
 </html>
