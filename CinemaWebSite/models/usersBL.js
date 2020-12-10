@@ -98,22 +98,25 @@ exports.addNewUser = async function(user){
  */
 exports.getAllUsers = async function(){
     let usersData = null;
-    //1. read all users
+    //1. read all users from user.json file
     let users = await userDal.readUsersFromFile();
-    //console.table(users);
-    //2. read all users's permissions
+    
+    //2. read all users's permissions from permissions.json
     let usersPermissions = await permissionDal.readPermissions();
     
-    //3. data shaping
+    //3. get all users from DB
+    let usersFromDB = await User.find({});
+    //4. data shaping
     if(users != undefined && usersPermissions != undefined){
         usersData = users.map(user =>{
             let userPermissions = usersPermissions.filter(permission => permission.id === user.id);
+            let userFromDB = usersFromDB.filter(u => u.id === user.id);
 
-            return {
+        return {
                 id: user.id,
                 firstName: user.firstName, 
                 lastName: user.lastName,
-                username : user.username,
+                username : userFromDB[0].username,
                 sessionTimeOut: user.sessionTimeOut,
                 createdDate : user.createdDate,
                 permissions: userPermissions[0].permissions
@@ -243,6 +246,7 @@ exports.createAccount = async function(account){
     let isExistAccount = false; //the account created by the admin (only username)
     let isUpdatedAccount = false; //username and pwd exist for user
     try{
+        //if admin created aleady the username for
         let userAccount = await User.findOne({username: account.username})
 
         let hashPwd = await bcrypt.hash(account.password, saltRounds);

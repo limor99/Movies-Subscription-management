@@ -16,7 +16,9 @@
     <div>
       <a href="/movies">Movies</a>&nbsp;
       <a href="/subscriptions">Subscriptions</a>&nbsp;
-      <a href="/users">User's Managemet</a>&nbsp;
+      <% if(user.username === 'admin'){ %>
+        <a href="/users">User's Managemet</a>&nbsp;
+      <% } %>
       <a href="/logout">Logout</a>&nbsp;
 
       <% if(user && user.firstName){ %>

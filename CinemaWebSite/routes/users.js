@@ -189,7 +189,7 @@ router.post('/newAccount', async function(req, res, next){
     res.render('users/createAccountPage', {data : "Create Account Page", msg: 'This user account doe\'s not exist, please contat the admin'});
   }
   else if(answer.isUpdatedAccount){
-    res.render('login', {data : 'Login Page'})
+    res.render('login', {data : 'Login Page', message: ''})
   }
   else{
     res.render('users/createAccountPage', {data : "Create Account Page", msg: 'An error occured, please try again'});

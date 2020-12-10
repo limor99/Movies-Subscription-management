@@ -33,13 +33,11 @@ passport.use(new LocalStrategy({passReqToCallback : true},
 
 
 passport.serializeUser(async function(user, done) {
-    console.log("paspport 111:" + user.id)
     done(null, user.id); 
   });
   
   passport.deserializeUser(function(id, done) {
     User.findById(id, function(err, user) {
-        console.log("paspport 2222 " + user)
       done(err, user);
     });
   });
