@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var flash = require('connect-flash');
 
 require('./configs/dbConfig');
 require('./authentication/localAuthentication');
@@ -40,6 +41,8 @@ app.use(function(req, res, next) {
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(flash());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -5,7 +5,10 @@ const passport = require('passport');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.render('login', { data : 'Login Page'});
+  // if login failed
+  let message = req.flash('error');
+  
+  res.render('login', { data : 'Login Page', message});
 });
 
 module.exports = router;
