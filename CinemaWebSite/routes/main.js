@@ -12,7 +12,7 @@ router.post('/', passport.authenticate('local', {failureRedirect: '/login', fail
   req.session.user = user;
   res.locals.user = user;
 
-  res.render('main', {title: "Main Page", name: `${user.firstName} ${user.lastName}`});
+  res.render('main', {title: "Main Page", name: `${user.firstName} ${user.lastName}`, message : ""});
 });
 
 module.exports = router;

@@ -9,27 +9,39 @@
     <%- include ../menu.ejs -%>
 
     <%= msg %>
-    <p>all movies</p> &nbsp;
-    <a href="/movies/new">Add Movie</a>
-
+    <b>all movies</b> &nbsp;
     
+    <a href="/movies/new">Add Movie</a>
+    
+
     <% movies.forEach(movie =>{ %>
-      <% console.log("inide for each") %>
-    <div class="card" style="width: 28rem;">
-      <div class="card-body">
-        <h5 class="card-title"><%= movie.name %></h5>
-        <p class="card-text">genres: <%= movie.genres %></p>
-        <div class="card-text">
-          <img src="<%= movie.image.medium %>" style="width:5rem"/>
-          <div > subscriptions</div>
+      <div class="card" style="width: 28rem;">
+        <div class="card-body">
+<% let d1 = movie.premiered 
+console.log(d1)
+let d2 = new Date(movie.premiered )
+console.log(d2)
+let d3 = d2.toLocaleDateString('en-GB')
+console.log(d3)
+let d4 = d2.toLocaleDateString('en-us')
+console.log(d4)
+%>
+
+
+          <h5 class="card-title"><%= movie.name %>, <%= (new Date(movie.premiered)).toLocaleDateString('en-GB') %></h5>
+          <p class="card-text">genres: <%= movie.genres %></p>
+          <div class="card-text">
+            <img src="<%= movie.image.medium %>" style="width:5rem"/>
+            <div > subscriptions</div>
+          </div>
+          
+          <a href="/movies/edit/<%= movie._id %>" class="btn btn-primary">Edit</a>
+          
+          <a href="/movies/delete/<%= movie._id %>" class="btn btn-primary">Delete</a>
+          
         </div>
-        
-        <a href="/movies/edit/<%= movie._id %>" class="btn btn-primary">Edit</a>
-        <a href="/movies/delete/<%= movie._id %>" class="btn btn-primary">Delete</a>
       </div>
-    </div>
     <% }) %>
-    <% console.log("outside for each") %>
 
   </body>
 </html>

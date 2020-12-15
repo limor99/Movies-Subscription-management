@@ -4,8 +4,10 @@ var router = express.Router();
 
 const moviesBL = require('../models/Movies/moviesBL');
 
+const checkPermissions =  require('../middlewares/checkPermissions');
+
 /* GET mobvies listing. */
-router.get('/', async function(req, res, next) {
+router.get('/', checkPermissions("View Movies"), async function(req, res, next) {
   let movies = await moviesBL.getMovies();
   
   if(movies){
@@ -16,7 +18,6 @@ router.get('/', async function(req, res, next) {
   }
   
 });
-
 
 router.post('/new/add', async function(req, res, next) {
   let name = req.body.name;
@@ -78,9 +79,7 @@ router.post('/update', async function(req, res, next) {
     console.log("inside post update")
     let movies = await moviesBL.getMovies();
     if(movies){
-      console.log("before render")
       res.render('movies/movies', { title : "Movies Page", msg : answer.msg, movies: movies});  
-      console.log("after render")
     }
     else{
       res.send('movie Updated, but an error occured while trying to get all movies');
@@ -96,11 +95,11 @@ router.post('/update', async function(req, res, next) {
   console.log("end post update")
 });
 
-router.get('/new', function(req, res, next) {
+router.get('/new', checkPermissions("Create Movies"), function(req, res, next) {
   res.render('movies/newMovie', { title : "Add Movies Page"});
 });
 
-router.get('/edit/:id', async function(req, res, next) {
+router.get('/edit/:id', checkPermissions("Update Movies"), async function(req, res, next) {
   let movie = null;
   let movieId = req.params.id;
   
@@ -113,7 +112,6 @@ router.get('/edit/:id', async function(req, res, next) {
         movie.premiered = movie.premiered.substring(0, 10);
       }
       
-      console.log(movie.premiered);
       res.render('movies/editMovie', { title : "Movies Page", movie : movie});
     }
     else{
@@ -128,7 +126,7 @@ router.get('/edit/:id', async function(req, res, next) {
 
 });
 
-router.get('/delete/:id', async function(req, res, next) {
+router.get('/delete/:id', checkPermissions("Delete Movies"), async function(req, res, next) {
   let movieId = req.params.id
   
   let answer = await moviesBL.deleteMovie(movieId);

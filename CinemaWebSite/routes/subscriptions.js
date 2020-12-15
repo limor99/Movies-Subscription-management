@@ -3,16 +3,16 @@ var router = express.Router();
 
 const membersBL = require('../models/Members/memberBL');
 
+const checkPermissions =  require('../middlewares/checkPermissions');
+
 /* GET home page. */
-router.get('/', async function(req, res, next) {
+router.get('/', checkPermissions("View Subscriptions"), async function(req, res, next) {
   let members = await membersBL.getMembers();
 
-  console.log(members);
-  
   res.render('subscriptions/subscriptions', { title: 'Subscriptions Page' , msg: '', members : members});
 });
 
-router.get('/new', function(req, res, next) {
+router.get('/new', checkPermissions("Create Subscriptions"), function(req, res, next) {
   res.render('subscriptions/newMember', { title : "Add Member Page"});
 });
 
@@ -45,7 +45,7 @@ router.post('/new/add', async function(req, res, next) {
   
 });
 
-router.get('/edit/:id', async function(req, res, next) {
+router.get('/edit/:id', checkPermissions("Update Subscriptions"), async function(req, res, next) {
   let member = null;
   let memberId = req.params.id;
   
@@ -101,7 +101,7 @@ router.post('/update', async function(req, res, next) {
 
 });
 
-router.get('/delete/:id', async function(req, res, next) {
+router.get('/delete/:id', checkPermissions("Delete Subscriptions"), async function(req, res, next) {
   let memberId = req.params.id
   
   let answer = await membersBL.deleteMember(memberId);

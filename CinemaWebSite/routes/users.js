@@ -185,7 +185,11 @@ router.post('/newAccount', async function(req, res, next){
   }
 
   let answer = await usersBl.createAccount(newAccount);
-  if(!answer.isExistAccount){
+
+  if(answer.isExistFullAccount){
+    res.render('login', {data : 'Login Page', message: 'User exist, please login'})
+  }
+  else if(!answer.isExistAccount){
     res.render('users/createAccountPage', {data : "Create Account Page", msg: 'This user account doe\'s not exist, please contat the admin'});
   }
   else if(answer.isUpdatedAccount){

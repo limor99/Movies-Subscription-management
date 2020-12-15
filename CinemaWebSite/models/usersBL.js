@@ -108,10 +108,12 @@ exports.getAllUsers = async function(){
     let usersFromDB = await User.find({});
     //4. data shaping
     if(users != undefined && usersPermissions != undefined){
+let i = 0;
+
         usersData = users.map(user =>{
             let userPermissions = usersPermissions.filter(permission => permission.id === user.id);
             let userFromDB = usersFromDB.filter(u => u.id === user.id);
-
+console.log("i:" + i++, userFromDB[0]);
         return {
                 id: user.id,
                 firstName: user.firstName, 
@@ -244,30 +246,36 @@ exports.deleteUser = async function(userId){
  */
 exports.createAccount = async function(account){
     let isExistAccount = false; //the account created by the admin (only username)
+    let isExistFullAccount = false; //the account created by admin and the user set the password already
     let isUpdatedAccount = false; //username and pwd exist for user
     try{
         //if admin created aleady the username for
         let userAccount = await User.findOne({username: account.username})
 
-        let hashPwd = await bcrypt.hash(account.password, saltRounds);
+        if(userAccount.password === undefined){
+            let hashPwd = await bcrypt.hash(account.password, saltRounds);
 
-        let updatedAccount = {
-            username: account.username,
-            password: hashPwd
+            let updatedAccount = {
+                username: account.username,
+                password: hashPwd
+            }
+            
+            if(userAccount != null){
+                isExistAccount = true;
+                await User.findByIdAndUpdate(userAccount.id, updatedAccount);
+                isUpdatedAccount = true;
+            }
         }
-        
-        if(userAccount != null){
-            isExistAccount = true;
-            await User.findByIdAndUpdate(userAccount.id, updatedAccount);
-            isUpdatedAccount = true;
+        else{
+            isExistFullAccount = true;
         }
-        
     }
     catch(err){
         console.log(`An error occured while try to add new account: username: ${newAccount.username}, pwd: ${newAccount.pwd}`);
     }
     finally{
         let answer = {
+            "isExistFullAccount": isExistFullAccount,
             "isExistAccount": isExistAccount,
             "isUpdatedAccount": isUpdatedAccount
         }

@@ -3,13 +3,30 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <script>
+        let isHide = true;
+        function subscribeToMovie(){
+          isHide = !isHide;
+
+          if(isHide){
+            $(".hide").hide();
+          }
+          else{
+            $(".hide").show();
+          }
+        }
+
+        
+
+    </script>
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     <%- include ../menu.ejs -%>
 
-    <p>All Member</p>
+    <b>All Member</b>
 
     <a href="/subscriptions/new">Add Memeber</a>
 
@@ -19,12 +36,20 @@
           <h5 class="card-title"><%= member.name %></h5>
           <p class="card-text">Email: <%= member.email %></p>
           <p class="card-text">City: <%= member.city %></p>
-          <div class="card-text">
-            <div > Mobvie Watched</div>
-          </div>
-          
+
           <a href="/subscriptions/edit/<%= member._id %>" class="btn btn-primary">Edit</a>
           <a href="/subscriptions/delete/<%= member._id %>" class="btn btn-primary">Delete</a>
+
+          <div class="card-text">
+            <h5> Movie Watched</h5>
+
+            <button onclick=subscribeToMovie()>Subscribe to new movie</button>
+            <div class="hide">
+                <form>
+                  <h6>Add a new movie</h6>
+                </form>
+            </div>
+          </div>
         </div>
       </div>
       <% }) %>

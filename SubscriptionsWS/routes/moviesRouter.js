@@ -4,11 +4,7 @@ const router = express.Router();
 const moviesBL = require('../models/moviesBL');
 
 router.route('/').get(async function(req, resp){
-  
-  console.log("before calling BL")
   let allMovies = await moviesBL.getMoviesFromDB();
-  console.log("after calling BL")
-  
   let success = false, msg = '';
   
 
@@ -111,14 +107,9 @@ router.route('/:id').put(async function(req, resp) {
     "premiered" : premiered
   }
 
-  console.log("put")
-
   let updateMovie = await moviesBL.updateMovie(id, movie);
-  console.log("11111: " + updateMovie)
-
   let success = false, msg;
   
-
   if(updateMovie != null){
     success = true;
     msg = 'The movie was update successfully';
@@ -132,10 +123,9 @@ router.route('/:id').put(async function(req, resp) {
     "movie": movie
   }
 
-  console.log(result)
   resp.json(result);
    
-  });
+});
 
 
   router.route('/:id').delete(async function(req, resp) {

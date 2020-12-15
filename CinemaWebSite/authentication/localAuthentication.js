@@ -19,7 +19,7 @@ passport.use(new LocalStrategy({passReqToCallback : true},
             let user = await usersBL.getUser(theUser);
             
             if(user){
-                return done(null, user, req.flash('success', 'good' ));
+                return done(null, user);
             }   
             else{
                 return done(null, false, req.flash('error', 'Invalid username or password' ));
