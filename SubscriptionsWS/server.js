@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 
 app.use('/api/movies', require('./routes/moviesRouter'));
 app.use('/api/members', require('./routes/membersRouter'));
+app.use('/api/subscriptions', require('./routes/subscriptionsRouter'));
 
 //initialize the db when server starts
 initialBL.initDB();

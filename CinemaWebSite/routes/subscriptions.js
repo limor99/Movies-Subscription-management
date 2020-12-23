@@ -2,14 +2,22 @@ var express = require('express');
 var router = express.Router();
 
 const membersBL = require('../models/Members/memberBL');
+const subscriptionsMoviesBL = require('../models/Members/subscriptionsMoviesBL');
+
 
 const checkPermissions =  require('../middlewares/checkPermissions');
 
 /* GET home page. */
 router.get('/', checkPermissions("View Subscriptions"), async function(req, res, next) {
-  let members = await membersBL.getMembers();
+//  let members = await membersBL.getMembers();
+  let subscriptionsMovies =await subscriptionsMoviesBL.getSubscriptionsMovies();
 
-  res.render('subscriptions/subscriptions', { title: 'Subscriptions Page' , msg: '', members : members});
+  if(subscriptionsMovies){
+    res.render('subscriptions/subscriptions', { title: 'Subscriptions Page' , msg: '', subscriptionsMovies : subscriptionsMovies});
+  }
+  else{
+    res.render('main', {title: "Main Page", message: `An error occured while try get members's subscriptions`});
+  }  
 });
 
 router.get('/new', checkPermissions("Create Subscriptions"), function(req, res, next) {
@@ -124,5 +132,38 @@ router.get('/delete/:id', checkPermissions("Delete Subscriptions"), async functi
 
 });
 
+router.post("/subscribe", async function(req, res, next){
+  let memberId = req.body.memberId;
+  let subscribeMovieId = req.body.unwatch;
+  let watchedDate = req.body.watchedDate;
+
+  let subscribeMovie = {
+    memberId,
+    subscribeMovieId,
+    watchedDate : new Date(watchedDate)
+  }
+
+  let answer = await subscriptionsMoviesBL.subscribeToMovie(subscribeMovie);
+
+  if(answer != null){
+    if(answer.success){
+      let subscriptionsMovies = await subscriptionsMoviesBL.getSubscriptionsMovies();
+      if(subscriptionsMovies){
+        res.render('subscriptions/subscriptions', { title : "Subscriptions Page", msg : answer.msg, subscriptionsMovies: subscriptionsMovies});  
+      }
+      else{
+        res.render('main', {title: "Main Page", message: `An error occured while try get members's subscriptions`});
+      }
+    }
+    else{
+      res.render('main', {title: "Main Page", message: `An error occured while try to add subscriptions to movie ${subscribeMovieId} to user ${memberId}`});
+    }
+  }
+  else{
+    //genereal error
+    res.render('error', {message: `An error occured while try to add subscriptions to movie ${subscribeMovieId} to user ${memberId}`, page: "subscriptions"});
+  }
+
+})
 
 module.exports = router;

@@ -4,7 +4,7 @@ var router = express.Router();
 const passport = require('passport');
 const { response } = require('../app');
 
-const userBL = require('../models/usersBL');
+const userBL = require('../models/Users/usersBL');
 
 
 router.post('/', passport.authenticate('local', {failureRedirect: '/login', failureFlash: true}), async function(req, res, next) {

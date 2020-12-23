@@ -1,10 +1,10 @@
-const memberRestUrl = 'http://localhost:8000/api/members/';
+const membersRestUrl = 'http://localhost:8000/api/members/';
 const axios = require('axios');
 
 exports.getMembers = async function(){
     let resp = null;
     try{
-        resp = await axios.get(memberRestUrl)
+        resp = await axios.get(membersRestUrl)
     }catch(err){
         console.log(`An error occured while try to get all members from rest api: ${err}`)
     }
@@ -16,7 +16,7 @@ exports.getMembers = async function(){
 exports.addMember = async function(member){
     let resp = null;
     try{
-        resp = await axios.post(memberRestUrl, member);
+        resp = await axios.post(membersRestUrl, member);
     }
     catch(err){
         console.log(`An error occured while try to add new member by rest api: ${err}`);
@@ -30,7 +30,7 @@ exports.addMember = async function(member){
 exports.getMemberById = async function(id){
     let resp = null;
     try{
-        resp = await axios.get(`${memberRestUrl}${id}`);
+        resp = await axios.get(`${membersRestUrl}${id}`);
     }
     catch(err){
         console.log(`An error occured while try to get member: ${id} by rest api: ${err}`);
@@ -43,7 +43,7 @@ exports.getMemberById = async function(id){
 exports.updateMember = async function(member){
     let resp = null;
     try{
-        resp = await axios.put(`${memberRestUrl}${member.id}`, member);
+        resp = await axios.put(`${membersRestUrl}${member.id}`, member);
     }
     catch(err){
         console.log(`An error occured while try to update member: ${id} by rest api: ${err}`);
@@ -57,7 +57,7 @@ exports.updateMember = async function(member){
 exports.deleteMember = async function(id){
     let resp = null;
     try{
-        resp = await axios.delete(`${memberRestUrl}${id}`);
+        resp = await axios.delete(`${membersRestUrl}${id}`);
     }catch(err){
         console.log(`An error occured while try to delete member: ${id} by rest api: ${err}`);
     }

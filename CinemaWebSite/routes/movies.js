@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 
 const moviesBL = require('../models/Movies/moviesBL');
+const subscribeBL = require('../models/Members/subscribeBL');
 
 const checkPermissions =  require('../middlewares/checkPermissions');
 
@@ -127,15 +128,17 @@ router.get('/edit/:id', checkPermissions("Update Movies"), async function(req, r
 });
 
 router.get('/delete/:id', checkPermissions("Delete Movies"), async function(req, res, next) {
-  let movieId = req.params.id
+  let movieId = req.params.id;
+
+  let answer1 = await subscribeBL.deleteMovieSubscribers(movieId);
   
-  let answer = await moviesBL.deleteMovie(movieId);
+  let answer2 = await moviesBL.deleteMovie(movieId);
 
 
-  if(answer != null){
+  if(answer1 != null && answer2 != null){
     let movies = await moviesBL.getMovies();
     if(movies){
-      res.render('movies/movies', { title : "Movies Page", msg : answer.msg, movies: movies});  
+      res.render('movies/movies', { title : "Movies Page", msg : answer2.msg, movies: movies});  
     }
     else{
       res.send('movie deleted, but an error occured while trying to get all movies');
@@ -147,6 +150,19 @@ router.get('/delete/:id', checkPermissions("Delete Movies"), async function(req,
     res.send('An error occured while trying to delete the movie');
   }
 
+});
+
+router.get('/:id', checkPermissions("View Movies"), async function(req, res, next) {
+  let id = req.params.id;
+  let response = await moviesBL.getMovieById(id);
+  
+  if(response.success){
+    res.render('movies/movies', { title : "Movies Page", msg: '', movies : [response.movie]});
+  }
+  else{
+    res.render('main', { title : "Main Page", msg: '', message: `An error occured while try get movie's data. movie id: ${id}`});
+  }
+  
 });
 
 module.exports = router;

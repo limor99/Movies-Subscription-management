@@ -1,6 +1,6 @@
 const User = require('./userModel');
-const userDal = require('../DAL/UserDAL/userFile');
-const permissionDal = require('../DAL/UserDAL/permissionFile');
+const userDal = require('../../DAL/UserDAL/userFile');
+const permissionDal = require('../../DAL/UserDAL/permissionFile');
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;

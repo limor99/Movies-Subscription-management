@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 
 const SubscriptionSchema = new Schema(
     {
-        memberId: ObjectId,
-        movies: [{movieId: ObjectId, date: Date}]
+        memberId: String,
+        movies: [{movieId: String, date: Date}]
     }
 )
 module.exports = mongoose.model("subscriptions", SubscriptionSchema)

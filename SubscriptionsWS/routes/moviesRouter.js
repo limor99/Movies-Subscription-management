@@ -62,14 +62,9 @@ router.route('/').post(async function(req, resp) {
     "premiered" : premiered
   }
 
-  console.log("post")
-
   let createdMovie = await moviesBL.addMovie(newMovie);
-  console.log("11111: " + createdMovie)
-
   let success = false, msg;
   
-
   if(createdMovie != null){
     success = true;
     msg = 'The movie was saved successfully';
@@ -87,8 +82,6 @@ router.route('/').post(async function(req, resp) {
    
   });
 
-
-  
 router.route('/:id').put(async function(req, resp) {
   let id = req.params.id;
   let name = req.body.name;

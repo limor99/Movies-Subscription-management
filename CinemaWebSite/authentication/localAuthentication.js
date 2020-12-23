@@ -2,12 +2,12 @@
  * authentication using username and password
  */
 
- const usersBL = require('../models/usersBL');
+ const usersBL = require('../models/Users/usersBL');
 
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
-const User = require('../models/userModel');
+const User = require('../models/Users/userModel');
 
 passport.use(new LocalStrategy({passReqToCallback : true},
     async function(req, username, password, done){

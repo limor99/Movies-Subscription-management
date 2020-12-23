@@ -1,12 +1,12 @@
 //const { request } = require("express")
-const movieRestUrl = 'http://localhost:8000/api/movies/';
+const moviesRestUrl = 'http://localhost:8000/api/movies/';
 
 const axios = require('axios');
 
 exports.addMovie = async function(movie){
     let resp = null;
     try{
-        resp = await axios.post(`${movieRestUrl}`, movie);
+        resp = await axios.post(`${moviesRestUrl}`, movie);
     }
     catch(err){
         console.log(`An error occured while try to add new movie by rest api: ${err}`);
@@ -20,7 +20,7 @@ exports.addMovie = async function(movie){
 exports.getMovies = async function(){
     let resp = null;
     try{
-        resp = await axios.get(movieRestUrl);
+        resp = await axios.get(moviesRestUrl);
     }
     catch(err){
         console.log(`An error occured while try to get all movies from rest api: ${err}`)
@@ -33,7 +33,7 @@ exports.getMovies = async function(){
 exports.updateMovie = async function(movie){
     let resp = null;
     try{
-        resp = await axios.put(`${movieRestUrl}${movie.id}`, movie);
+        resp = await axios.put(`${moviesRestUrl}${movie.id}`, movie);
     }
     catch(err){
         console.log(`An error occured while try to update movie: ${id} by rest api: ${err}`);
@@ -46,7 +46,7 @@ exports.updateMovie = async function(movie){
 exports.deleteMovie = async function(id){
     let resp = null;
     try{
-        resp = await axios.delete(`${movieRestUrl}${id}`);
+        resp = await axios.delete(`${moviesRestUrl}${id}`);
     }catch(err){
         console.log(`An error occured while try to delete movie: ${id} by rest api: ${err}`);
     }
@@ -58,7 +58,7 @@ exports.deleteMovie = async function(id){
 exports.getMovieById = async function(id){
     let resp = null;
     try{
-        resp = await axios.get(`${movieRestUrl}${id}`);
+        resp = await axios.get(`${moviesRestUrl}${id}`);
     }
     catch(err){
         console.log(`An error occured while try to get movie: ${id} by rest api: ${err}`);

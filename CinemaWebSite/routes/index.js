@@ -3,7 +3,7 @@ var router = express.Router();
 
 
 //delete
-const usersBL = require('../models/usersBL');
+const usersBL = require('../models/Users/usersBL');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

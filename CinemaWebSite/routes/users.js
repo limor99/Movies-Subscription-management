@@ -2,7 +2,7 @@ const { request } = require('express');
 var express = require('express');
 var router = express.Router();
 
-const usersBl = require('../models/usersBL');
+const usersBl = require('../models/Users/usersBL');
 
 /* GET users listing. */
 router.get('/', async function(req, res, next) {
