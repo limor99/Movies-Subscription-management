@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    
+    <h1><%= title %></h1>
+    <%- include ../menu.ejs -%>
+
+    <div>
+      <a href="/movies">All Movies</a>&nbsp;
+      <a href="/movies/new">Add Movie</a>
+    </div>
+
+    <b>Movie: <%= movie.name %></b>
+
+      <div class="card" style="width: 28rem;">
+        <div class="card-body">
+          <p class="card-text">Name: <%= movie.name %></p>
+          <p class="card-text">Genres: <%= movie.genres %></p>
+          <p class="card-text">Image url: <%= movie.image.medium %></p>
+          <p class="card-text">Premiered: <%= (new Date(movie.premiered)).toLocaleDateString('en-Gb') %></p>
+        </div>
+      </div>
+  </body>
+</html>

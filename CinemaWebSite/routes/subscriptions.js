@@ -7,7 +7,6 @@ const subscriptionsMoviesBL = require('../models/Members/subscriptionsMoviesBL')
 
 const checkPermissions =  require('../middlewares/checkPermissions');
 
-/* GET home page. */
 router.get('/', checkPermissions("View Subscriptions"), async function(req, res, next) {
 //  let members = await membersBL.getMembers();
   let subscriptionsMovies =await subscriptionsMoviesBL.getSubscriptionsMovies();
@@ -18,6 +17,29 @@ router.get('/', checkPermissions("View Subscriptions"), async function(req, res,
   else{
     res.render('main', {title: "Main Page", message: `An error occured while try get members's subscriptions`});
   }  
+});
+
+router.get('/:id', checkPermissions("View Subscriptions"), async function(req, res, next) {
+  let member = null;
+  let memberId = req.params.id;
+  
+  let answer = await membersBL.getMemberById(memberId);
+
+  if(answer != null){
+    if(answer.success){
+      member = answer.member;
+      
+      res.render('subscriptions/member', { title : "Member Page", member : member});
+    }
+    else{
+      res.send(`An error occured while trying to get data of member: ${memberId}`);
+    }
+
+  }
+  else{
+    //genereal error
+    res.send('An error occured while trying to gey the member: ${memberId} data');
+  }
 });
 
 router.get('/new', checkPermissions("Create Subscriptions"), function(req, res, next) {

@@ -38,7 +38,7 @@ exports.getSubscriptionsMovies = async function(){
                             return {
                                 "movieId" : movie[0]._id,
                                 "movieName" : movie[0].name,
-                                "moviePremiered" : movie[0].premiered
+                                "watchDate" : mi.date
                             }
 
                         }

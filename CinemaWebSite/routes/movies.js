@@ -4,15 +4,18 @@ var router = express.Router();
 
 const moviesBL = require('../models/Movies/moviesBL');
 const subscribeBL = require('../models/Members/subscribeBL');
+const movieSubscriberBL = require('../models/Movies/movieSubscribersBL');
 
 const checkPermissions =  require('../middlewares/checkPermissions');
 
 /* GET mobvies listing. */
 router.get('/', checkPermissions("View Movies"), async function(req, res, next) {
-  let movies = await moviesBL.getMovies();
+  //let movies = await moviesBL.getMovies();
+
+  let moviesSubscribed = await movieSubscriberBL.getMoviesSubscribers();
   
-  if(movies){
-    res.render('movies/movies', { title : "Movies Page", msg: '', movies : movies});
+  if(moviesSubscribed){
+    res.render('movies/movies', { title : "Movies Page", msg: '', moviesSubscribed : moviesSubscribed});
   }
   else{
     res.send('An error occured while trying to get all movies');
@@ -157,7 +160,8 @@ router.get('/:id', checkPermissions("View Movies"), async function(req, res, nex
   let response = await moviesBL.getMovieById(id);
   
   if(response.success){
-    res.render('movies/movies', { title : "Movies Page", msg: '', movies : [response.movie]});
+    let movie = response.movie;
+    res.render('movies/movie', { title : "Movie Page", msg: '', movie : movie});
   }
   else{
     res.render('main', { title : "Main Page", msg: '', message: `An error occured while try get movie's data. movie id: ${id}`});

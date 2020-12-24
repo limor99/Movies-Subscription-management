@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <%- include ../menu.ejs -%>
+
+    <div>
+      <a href="/subscriptions">All Members</a> &nbsp; 
+      <a href="/subscriptions/new">Add Memeber</a>
+    </div>
+
+    <b>Member: <%= member.name %></b>
+      <div class="card" style="width: 28rem;">
+        <div class="card-body">
+          <p class="card-text">Name: <%= member.name %></p>
+          <p class="card-text">Email: <%= member.email %></p>
+          <p class="card-text">City: <%= member.city %></p>
+        </div>
+      </div>
+     
+  </body>
+</html>

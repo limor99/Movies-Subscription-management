@@ -17,30 +17,26 @@
     <a href="/movies/new">Add Movie</a>
     
 
-    <% movies.forEach(movie =>{ %>
+    <% moviesSubscribed.forEach(ms =>{ %>
       <div class="card" style="width: 28rem;">
         <div class="card-body">
-<% let d1 = movie.premiered 
-console.log(d1)
-let d2 = new Date(movie.premiered )
-console.log(d2)
-let d3 = d2.toLocaleDateString('en-GB')
-console.log(d3)
-let d4 = d2.toLocaleDateString('en-us')
-console.log(d4)
-%>
-
-
-          <h5 class="card-title"><%= movie.name %>, <%= (new Date(movie.premiered)).toLocaleDateString('en-GB') %></h5>
-          <p class="card-text">genres: <%= movie.genres %></p>
+          <h5 class="card-title"><%= ms.movieName %>, <%= (new Date(ms.moviePremiered)).toLocaleDateString('en-GB') %></h5>
+          <p class="card-text">genres: <%= ms.movieGenres %></p>
           <div class="card-text">
-            <img src="<%= movie.image.medium %>" style="width:5rem"/>
-            <div > subscriptions</div>
+            <img src="<%= ms.movieImage %>" style="width:5rem"/>
+            <h5 > Subscriptions Watched</h5>
+            <div>
+              <ul>
+                <% ms.subscriberToMovie.forEach(stm =>{ %>
+                  <li><a href="/subscriptions/<%= stm.memberId %>"><%= stm.memberName %></a></li>
+                <% })  %>
+              </ul>
+            </div>
           </div>
           
-          <a href="/movies/edit/<%= movie._id %>" class="btn btn-primary">Edit</a>
+          <a href="/movies/edit/<%= ms.movieId %>" class="btn btn-primary">Edit</a>
           
-          <a href="/movies/delete/<%= movie._id %>" class="btn btn-primary">Delete</a>
+          <a href="/movies/delete/<%= ms.movieId %>" class="btn btn-primary">Delete</a>
           
         </div>
       </div>

@@ -64,7 +64,7 @@
             <div>
               <ul>
                 <% sm.movies.forEach(m =>{ %>
-                  <li><a href="/movies/<%= m.movieId %>"><%= m.movieName %></a>, <%= (new Date(m.moviePremiered)).toLocaleDateString('en-GB') %></li>
+                  <li><a href="/movies/<%= m.movieId %>"><%= m.movieName %></a>, <%= (new Date(m.watchDate)).toLocaleDateString('en-Gb') %></li>
 
                 <% }) %>
               </ul>
