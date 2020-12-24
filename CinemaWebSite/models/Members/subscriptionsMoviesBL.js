@@ -1,33 +1,25 @@
 const memberBL = require('./memberBL');
 const subscriptionsRest = require('../../DAL/subscriptionsDAL/subscriptionsRest');
 const moviesBL = require('../Movies/moviesBL');
+const subscriptionsBL = require('../Members/subscribeBL');
 
 
 exports.getSubscriptionsMovies = async function(){
     let subscriptionsMovies = null;
-    let data = null;
-    let subscriptions = null;
     let members = await memberBL.getMembers();
-    let answer = await subscriptionsRest.getSubscriptions();
+    let subscriptions = await subscriptionsBL.getSubscribers();
     let movies = await moviesBL.getMovies();
-
-    if(answer != null){
-        data = answer.data;
-        if(data.success){
-            subscriptions = data.subscriptions;
-        }
-    }
 
     if(members && subscriptions && movies)
     {
         subscriptionsMovies = members.map(member =>{
-            let memberSubscribesMovies;  //all the subscribes movies's (for user)
-            let memberMovies;   //all unwatched movies (for user)
-            let subscribeMoviesIds = []; //all the subscribes movies's id (for user)
-            let unsubscribedMovies = [];
-            let memberMovieId = subscriptions.filter(s => s.memberId === member._id);
-            if(memberMovieId.length > 0){
-                memberSubscribesMovies = memberMovieId[0].movies;
+            let memberSubscribesMovies;  //all movies the member watched already (the movie's id and watched date)
+            let memberMovies;   //all movies the member watched already (include the movie's data)
+            let subscribeMoviesIds = [];    //all the subscribes's movies id (for member)
+            let unsubscribedMovies = [];    //unwatched movies for member
+            let subscription = subscriptions.filter(s => s.memberId === member._id);
+            if(subscription.length > 0){
+                memberSubscribesMovies = subscription[0].movies;
                 let movie;
 
                 if(memberSubscribesMovies != undefined){
@@ -55,20 +47,6 @@ exports.getSubscriptionsMovies = async function(){
                            unsubscribedMovies = [...unsubscribedMovies, unsubscribedMovie];
                         }
                     });
-/*
-                    movies.forEach(m =>{
-                        let unwatched = moviesIds.filter(mi => mi.movieId !== m._id);
-                        if(unwatched.length > 0){
-                            let unsubscribedMovie = {
-                                "_id" : m._id,
-                                "name" : m.name
-                            }
-                            
-                           unsubscribedMovies = [...unsubscribedMovies, unsubscribedMovie];
-                        }
-                       // return unwatched;
-                    })
-                    */
                 }
             }
             else{
