@@ -68,4 +68,20 @@ exports.getMovieById = async function(movieId){
 
     return data;
 }
-    
+
+exports.searchMovie = async function(text){
+    let searchResult = null;
+    let data = null;
+
+    let answer = await movieRest.searchMovie(text);
+
+    if(answer != null){
+        data = answer.data;
+        if(data != null && data.success){
+            searchResult = data.movies;
+
+        }
+    }
+
+    return searchResult;
+}

@@ -14,7 +14,12 @@
   
     <b>all movies</b> &nbsp;
     
-    <a href="/movies/new">Add Movie</a>
+    <a href="/movies/new">Add Movie</a> &nbsp; Find Movie 
+    
+    <form action="/movies/search" method="POST">
+      <input type="text" name="search"/>
+      <input type="submit" value="Find"/>
+    </form>
     
 
     <% moviesSubscribed.forEach(ms =>{ %>

@@ -24,6 +24,8 @@ router.route('/').get(async function(req, resp){
   
 })
 
+
+
 router.route('/:id').get(async function(req, resp){
   let id = req.params.id;
   let success = false, msg = '';
@@ -44,6 +46,29 @@ router.route('/:id').get(async function(req, resp){
   resp.json(result);
   
 })
+
+
+router.route('/search/:text').get(async function(req, resp){
+  let searchText = req.params.text;
+
+  let success = false, msg = '';
+  let movies = await moviesBL.searchMovies(searchText);
+    
+  if(movies != null){
+    success = true;
+  }else{
+    msg = `An error occurred while trying to get movies with search: ${searchText}`;
+  }
+
+  let result = {
+    "success": success,
+    "msg": msg, 
+    "movies" : movies
+  }
+
+  resp.json(result);
+
+});
 
 router.route('/').post(async function(req, resp) {
   let name = req.body.name;

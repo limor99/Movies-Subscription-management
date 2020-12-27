@@ -47,6 +47,20 @@ exports.getMovieById = async function(id){
     }
 }
 
+exports.searchMovies = async function(text){
+    let movies = null;
+    try{
+        movies = await Movie.find({name:{ $regex: '.*' + text + '.*' } })
+    }
+    catch(err){
+        console.log(`An error occured while try to get movie data: ${text}: ${err}`);
+    }
+    finally{
+        return movies;
+    }
+
+}
+
 //add movie to db
 exports.addMovie = async function(movie){
     let createdMovie = null;

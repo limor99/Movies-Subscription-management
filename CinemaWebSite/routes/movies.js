@@ -12,7 +12,7 @@ const checkPermissions =  require('../middlewares/checkPermissions');
 router.get('/', checkPermissions("View Movies"), async function(req, res, next) {
   //let movies = await moviesBL.getMovies();
 
-  let moviesSubscribed = await movieSubscriberBL.getMoviesSubscribers();
+  let moviesSubscribed = await movieSubscriberBL.getAllMovies();
   
   if(moviesSubscribed){
     res.render('movies/movies', { title : "Movies Page", msg: '', moviesSubscribed : moviesSubscribed});
@@ -79,11 +79,11 @@ router.post('/update', async function(req, res, next) {
   let answer = await moviesBL.updateMovie(movie);
 
 
-  if(answer != null){
-    console.log("inside post update")
-    let movies = await moviesBL.getMovies();
-    if(movies){
-      res.render('movies/movies', { title : "Movies Page", msg : answer.msg, movies: movies});  
+  if(answer != null && answer.success){
+    let moviesSubscribed = await movieSubscriberBL.getAllMovies();
+    
+    if(moviesSubscribed){
+      res.render('movies/movies', { title : "Movies Page", msg : answer.msg, moviesSubscribed: moviesSubscribed});  
     }
     else{
       res.send('movie Updated, but an error occured while trying to get all movies');
@@ -138,10 +138,11 @@ router.get('/delete/:id', checkPermissions("Delete Movies"), async function(req,
   let answer2 = await moviesBL.deleteMovie(movieId);
 
 
-  if(answer1 != null && answer2 != null){
-    let movies = await moviesBL.getMovies();
-    if(movies){
-      res.render('movies/movies', { title : "Movies Page", msg : answer2.msg, movies: movies});  
+  if(answer1 != null && answer1.success && answer2 != null && answer2.success){
+    //let movies = await moviesBL.getMovies();
+    let moviesSubscribed = await movieSubscriberBL.getAllMovies();
+    if(moviesSubscribed){
+      res.render('movies/movies', { title : "Movies Page", msg : answer2.msg, moviesSubscribed: moviesSubscribed});  
     }
     else{
       res.send('movie deleted, but an error occured while trying to get all movies');
@@ -164,9 +165,23 @@ router.get('/:id', checkPermissions("View Movies"), async function(req, res, nex
     res.render('movies/movie', { title : "Movie Page", msg: '', movie : movie});
   }
   else{
-    res.render('main', { title : "Main Page", msg: '', message: `An error occured while try get movie's data. movie id: ${id}`});
+    res.render('main', { title : "Main Page", msg: '', message: `An error occured while try get movie's data. movie's id: ${id}`});
   }
   
+});
+
+router.post('/search', checkPermissions("View Movies"), async function(req, res, next) {
+  let searchText = req.body.search;
+
+  let searchResult = await movieSubscriberBL.searchMovie(searchText);
+
+  if(searchResult){
+    res.render('movies/movies', { title : "Search Result", msg: '', moviesSubscribed : searchResult});
+  }
+  else{
+    res.send(`An error occured while trying to get movie's search: ${searchText}`);
+  }
+
 });
 
 module.exports = router;

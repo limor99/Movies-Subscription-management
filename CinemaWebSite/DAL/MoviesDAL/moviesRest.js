@@ -68,3 +68,17 @@ exports.getMovieById = async function(id){
     }
 
 }
+
+exports.searchMovie = async function(text){
+    let resp = null;
+    try{
+        resp = await axios.get(`${moviesRestUrl}search/${text}`);
+    }
+    catch(err){
+        console.log(`An error occured while try to get movie with: ${text} by rest api: ${err}`);
+    }
+    finally{
+        return resp;
+    }
+
+}

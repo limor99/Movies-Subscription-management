@@ -24,7 +24,7 @@ router.route('/').get(async function(req, resp){
       resp.json(result);
 })
 
-router.route('/:id').delete(async function(req, resp){
+router.route('/:id').delete(async function(req, resp){2
     let movieId = req.params.id;
 
     let deletedSubscribesMovie = await subscriptionsBL.deletedSubscribeMovies(movieId);
