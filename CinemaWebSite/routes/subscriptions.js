@@ -8,7 +8,6 @@ const subscriptionsMoviesBL = require('../models/Members/subscriptionsMoviesBL')
 const checkPermissions =  require('../middlewares/checkPermissions');
 
 router.get('/', checkPermissions("View Subscriptions"), async function(req, res, next) {
-//  let members = await membersBL.getMembers();
   let subscriptionsMovies =await subscriptionsMoviesBL.getSubscriptionsMovies();
 
   if(subscriptionsMovies){
@@ -38,7 +37,7 @@ router.get('/:id', checkPermissions("View Subscriptions"), async function(req, r
   }
   else{
     //genereal error
-    res.send('An error occured while trying to gey the member: ${memberId} data');
+    res.send('An error occured while trying to get the member: ${memberId} data');
   }
 });
 
@@ -94,7 +93,7 @@ router.get('/edit/:id', checkPermissions("Update Subscriptions"), async function
   }
   else{
     //genereal error
-    res.send('An error occured while trying to gey the member: ${memberId} data');
+    res.send('An error occured while trying to get the member: ${memberId} data');
   }
 });
 
@@ -125,7 +124,6 @@ router.post('/update', async function(req, res, next) {
   }
   else{
     //genereal error
-    //res.send('An error occured while trying to save the member');
     res.render('error', {message: 'An error occured while trying to save the member', page: "subscriptions"});
   }
 
@@ -148,7 +146,6 @@ router.get('/delete/:id', checkPermissions("Delete Subscriptions"), async functi
   }
   else{
     //genereal error
-    //res.send('An error occured while trying to delete the member');
     res.render('error', {message: 'An error occured while trying to delete the member', page: "subscriptions"});
   }
 

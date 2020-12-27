@@ -10,24 +10,14 @@ exports.getUser = async function(user){
     let returnUser;
     try{
         let existUser = await User.findOne({username: user.username});
-/*
-bcrypt.hash(user.password, saltRounds).then(function(hash) {
-    console.log(hash);
-});
-*/
+
         if(existUser.password){
             let isSamePsw = await bcrypt.compare(user.password, existUser.password);
             if(isSamePsw){
                 returnUser = existUser;
             }
-            //bcrypt.compare(user.password, existUser.password).then(function(result){
-                //console.log(result);
-               // if(result){
-               //     returnUser = existUser;
-                    
-               // }
-                return returnUser
-           // })
+            
+            return returnUser
         }
     }
     catch(err){
@@ -62,18 +52,7 @@ exports.addNewUser = async function(user){
         let isUserAddedToFile = await userDal.addUserToFile(newUser);
                 
         // 3. add new user to permisions.json file
-       /* let newUserPermisions = { "id": createdUser.id,
-                                    "permisions": 
-                                        [{"viewSubscriptions": user.viewSubscriptions}, 
-                                        {"createSubscriptions": user.createSubscriptions}, 
-                                        {"deleteSubscriptions": user.deleteSubscriptions}, 
-                                        {"updateSubscriptions": user.updateSubscriptions}, 
-                                        {"viewMovies": user.viewMovies}, 
-                                        {"createMovies": user.createMovies}, 
-                                        {"deleteMovies": user.deleteMovies}, 
-                                        {"updateMovies": user.updateMovies}]
-                                     }
-*/
+       
         let newUserPermisions = { "id": createdUser.id,
                                     "permissions": user.permissions
                                      }
@@ -282,19 +261,4 @@ exports.createAccount = async function(account){
         return answer;
     }
 
-}
-
-/** TODO: not in use???? DELETE */
-/** get user's first name and last name */
-exports.getUserName = async function(userid){
-    let userName;
-    let usersFromFile = await userDal.readUsersFromFile();
-
-    let user = usersFromFile.filter(u => u.id === userid);
-
-    if(user[0]){
-        userName = `${user[0].firstName} ${user[0].lastName}`;
-    }
-
-    return userName;
 }

@@ -10,8 +10,6 @@ const checkPermissions =  require('../middlewares/checkPermissions');
 
 /* GET mobvies listing. */
 router.get('/', checkPermissions("View Movies"), async function(req, res, next) {
-  //let movies = await moviesBL.getMovies();
-
   let moviesSubscribed = await movieSubscriberBL.getAllMovies();
   
   if(moviesSubscribed){
@@ -125,7 +123,7 @@ router.get('/edit/:id', checkPermissions("Update Movies"), async function(req, r
   }
   else{
     //genereal error
-    res.send('An error occured while trying to gey the movie: ${movieId} data');
+    res.send('An error occured while trying to get the movie: ${movieId} data');
   }
 
 });
@@ -139,7 +137,6 @@ router.get('/delete/:id', checkPermissions("Delete Movies"), async function(req,
 
 
   if(answer1 != null && answer1.success && answer2 != null && answer2.success){
-    //let movies = await moviesBL.getMovies();
     let moviesSubscribed = await movieSubscriberBL.getAllMovies();
     if(moviesSubscribed){
       res.render('movies/movies', { title : "Movies Page", msg : answer2.msg, moviesSubscribed: moviesSubscribed});  

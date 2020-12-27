@@ -22,51 +22,26 @@ router.post('/new/add', async function(req, res, next) {
     let lastName = req.body.lastName;
     let username = req.body.username;
     let sessionTimeOut = req.body.sessionTimeOut;
-    /*
-    let viewSubscriptionsPermision = req.body.viewSubscriptions != undefined ? true : false;
-    let createSubscriptionsPermision = req.body.createSubscriptions != undefined ? true : false;
-    let deleteSubscriptionsPermision = req.body.deleteSubscriptions != undefined ? true : false;
-    let updateSubscriptionsPermision = req.body.updateSubscriptions != undefined ? true : false;
-    let viewMoviesPermision = req.body.viewMovies != undefined ? true : false;
-    let createMoviesPermision = req.body.createMovies != undefined ? true : false;
-    let deleteMoviesPermision = req.body.deleteMovies != undefined ? true : false;
-    let updateMoviesPermision = req.body.updateMovies != undefined ? true : false;
+    
+    let userPermissions = [];
+    req.body.viewSubscriptions != undefined ? userPermissions.push("View Subscriptions") : null;
+    req.body.createSubscriptions != undefined ? userPermissions.push("Create Subscriptions") : null;
+    req.body.deleteSubscriptions != undefined ? userPermissions.push("Delete Subscriptions") : null;
+    req.body.updateSubscriptions != undefined ? userPermissions.push("Update Subscriptions") : null;
+    req.body.viewMovies != undefined ? userPermissions.push("View Movies") : null;
+    req.body.createMovies != undefined ? userPermissions.push("Create Movies") : null;
+    req.body.deleteMovies != undefined ? userPermissions.push("Delete Movies") : null;
+    req.body.updateMovies != undefined ? userPermissions.push("Update Movies") : null;
+
 
     let newUser = {
       "firstName" : firstName,
       "lastName" : lastName,
       "username" : username,
       "sessionTimeOut" : sessionTimeOut,
-      "viewSubscriptions" : viewSubscriptionsPermision,
-      "createSubscriptions" : createSubscriptionsPermision,
-      "deleteSubscriptions" : deleteSubscriptionsPermision,
-      "updateSubscriptions" : updateSubscriptionsPermision,
-      "viewMovies" : viewMoviesPermision,
-      "createMovies" : createMoviesPermision,
-      "deleteMovies" : deleteMoviesPermision,
-      "udateMovieds" : updateMoviesPermision
+      "permissions" : userPermissions
 
     }
-*/
-let userPermissions = [];
-req.body.viewSubscriptions != undefined ? userPermissions.push("View Subscriptions") : null;
-req.body.createSubscriptions != undefined ? userPermissions.push("Create Subscriptions") : null;
-req.body.deleteSubscriptions != undefined ? userPermissions.push("Delete Subscriptions") : null;
-req.body.updateSubscriptions != undefined ? userPermissions.push("Update Subscriptions") : null;
-req.body.viewMovies != undefined ? userPermissions.push("View Movies") : null;
-req.body.createMovies != undefined ? userPermissions.push("Create Movies") : null;
-req.body.deleteMovies != undefined ? userPermissions.push("Delete Movies") : null;
-req.body.updateMovies != undefined ? userPermissions.push("Update Movies") : null;
-
-
-let newUser = {
-  "firstName" : firstName,
-  "lastName" : lastName,
-  "username" : username,
-  "sessionTimeOut" : sessionTimeOut,
-  "permissions" : userPermissions
-
-}
 
     let isAdded = await usersBl.addNewUser(newUser);
 
@@ -133,8 +108,6 @@ router.post('/update', async function(req, res, next) {
 
 });
 
-
-/* GET users listing. */
 router.get('/new', function(req, res, next) {
   res.render('users/newUser', { title : "Add User Page"});
 });
