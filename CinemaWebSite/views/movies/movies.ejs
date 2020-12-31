@@ -2,50 +2,83 @@
 <html>
   <head>
     <title><%= title %></title>
-    <% console.log("before css") %>
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <%- include ../menu.ejs -%>
-    
-    <div class="msg">
-    <%= msg %>
-  </div>
-  
-    <b>all movies</b> &nbsp;
-    
-    <a href="/movies/new">Add Movie</a> &nbsp; Find Movie 
-    
-    <form action="/movies/search" method="POST">
-      <input type="text" name="search"/>
-      <input type="submit" value="Find"/>
-    </form>
-    
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <!-- for bootstrap -->
+    ​<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <% moviesSubscribed.forEach(ms =>{ %>
-      <div class="card" style="width: 28rem;">
+    
+  </head>
+  <body class="bgColor">
+    
+    <%- include ../menu.ejs -%>
+
+    <div class="sub_navbar">
+      <ul class="sub_nav">
+        <div class="section">
+          <li>
+            <b>all movies</b>
+          </li>
+          <li>
+            <a href="/movies/new">Add Movie</a>
+          </li>
+        </div>
+        <div class="find">
+          <form action="/movies/search" method="POST" class="search">
+            <div class="form-group mx-sm-3 mb-2" class="searchText">
+              <label for="search" class="sr-only">Find Movie</label>
+              <input type="text" class="form-control" id="search" name="search" placeholder="Find Movie">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Find</button>
+          </form>
+        </div>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h1><%= title %></h1>
+    
+      <div class="msg">
+        <%= msg %>
+      </div>
+
+      <% moviesSubscribed.forEach(ms =>{ %>
+      <div class="card">
         <div class="card-body">
           <h5 class="card-title"><%= ms.movieName %>, <%= (new Date(ms.moviePremiered)).toLocaleDateString('en-GB') %></h5>
           <p class="card-text">genres: <%= ms.movieGenres %></p>
           <div class="card-text">
-            <img src="<%= ms.movieImage %>" style="width:5rem"/>
-            <h5 > Subscriptions Watched</h5>
             <div>
-              <ul>
-                <% ms.subscriberToMovie.forEach(stm =>{ %>
-                  <li><a href="/subscriptions/<%= stm.memberId %>"><%= stm.memberName %></a></li>
-                <% })  %>
-              </ul>
+              <img src="<%= ms.movieImage %>" style="width:5rem"/>
+            </div>
+            <div class="watched">
+              <h5 > Subscriptions Watched</h5>
+              <div>
+                <ul>
+                  <% ms.subscriberToMovie.forEach(stm =>{ %>
+                    <li><a href="/subscriptions/<%= stm.memberId %>"><%= stm.memberName %></a></li>
+                  <% })  %>
+                </ul>
+              </div>
             </div>
           </div>
-          
-          <a href="/movies/edit/<%= ms.movieId %>" class="btn btn-primary">Edit</a>
-          
-          <a href="/movies/delete/<%= ms.movieId %>" class="btn btn-primary">Delete</a>
+
+          <button class="btn btn-primary">
+            Edit
+            <a href="/movies/edit/<%= ms.movieId %>"></a>
+          </button>
+          <button class="btn btn-primary">
+            Delete
+            <a href="/movies/delete/<%= ms.movieId %>"></a>
+          </button>
           
         </div>
       </div>
-    <% }) %>
+      <% }) %>
+    </div>
 
   </body>
 </html>

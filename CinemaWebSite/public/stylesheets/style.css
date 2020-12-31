@@ -1,16 +1,184 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: red!important;
+  background-color: black!important;
+  background-image: url("/images/cinema.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: auto;
+  max-height: 0;
 }
 
 a {
-  color: #00B7FF;
+  color: red!important;
+  
 }
+
+button{
+  background-color: red!important;
+  border-color: #ffcccc!important;
+}
+
+.welcome{
+  display: flex;
+  flex-direction: column;
+
+}
+
+.login .form-group{
+  width: 30%;
+}
+
+.bgColor{
+  background-image: none;
+  
+}
+
+#header {
+  display: flex;
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  right: 0;
+  z-index: 9999;
+  
+}
+
+.nav_bar{
+  width: 100%;
+  line-height: 3rem;
+}
+
+.menu{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  background-color: red;
+  color: white;
+  /*align-content: space-between;*/
+  justify-content: space-between;
+  list-style: none;
+
+}
+
+
+.nav{
+  display: flex;
+  justify-content: space-between;
+  color: white;
+
+}
+
+nav li a{
+  color: white!important;
+}
+
+
+.left_nav{
+  width: 30%;
+}
+
+.right_nav{
+  width: 20%;
+  margin-right: 2rem;
+}
+
+.sub_navbar{
+  margin-top: 3rem;
+  display: flex;
+}
+
+
+
+
+.sub_nav{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  list-style: none;
+  justify-content: space-between;
+}
+
+
+.section{
+  display: flex;
+  justify-content: space-between;
+  width: 17%;
+  line-height: 2.4rem;
+}
+
+.find{
+  width: 80%;
+}
+
+
+
+.search{
+  display: flex;
+}
+
+.searchText{
+  width: 100%;
+}
+
+/* global for all pages */
+.content{
+  margin: 0 2.5rem;
+  padding-bottom: 1rem;
+}
+
+.card{
+  width: 50%;
+  background-image: linear-gradient(black, white);
+  margin-bottom: 1rem;
+  border-top: 1px solid black!important;
+  border-left: 1px solid red!important;
+
+}
+
+.add{
+  padding-bottom: 1rem;
+}
+
+
+/* end global */
+
+/* movies page */ 
+.card-text{
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.watched{
+  margin-left: 5rem;
+}
+
+.watched ul li{
+  margin-left: -1.5rem;
+}
+
+.container{
+  background-image: linear-gradient(black, white);
+  margin-bottom: 1rem;
+  border-top: 1px solid black!important;
+  border-left: 1px solid red!important;
+  margin-left: 0!important;
+  width: 50%!important;
+
+}
+
+/* end movies */
 
 .hide{
   display: none;
 }
 
 .msg{
-  color: red;
+  /*color: red;*/
+  background-color: white;
+  width: 30%;
+  margin-bottom: 1rem;
 }
+
+
