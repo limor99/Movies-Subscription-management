@@ -40,9 +40,10 @@ router.post('/new/add', async function(req, res, next) {
   let answer = await moviesBL.addMovie(newMovie);
   
   if(answer != null){
-    let movies = await moviesBL.getMovies();
-    if(movies){
-      res.render('movies/movies', { title : "Movies Page", msg : answer.msg, movies: movies});  
+    //let movies = await moviesBL.getMovies();
+    let moviesSubscribed = await movieSubscriberBL.getAllMovies();
+    if(moviesSubscribed){
+      res.render('movies/movies', { title : "Movies Page", msg : answer.msg, moviesSubscribed: moviesSubscribed});  
     }
     else{
       res.send('movie added, but an error occured while trying to get all movie');
