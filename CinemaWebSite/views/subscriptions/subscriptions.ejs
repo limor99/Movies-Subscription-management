@@ -2,8 +2,7 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-
+    
     <script>
         let isHide = true;
         function subscribeToMovie(id){
@@ -21,57 +20,75 @@
 
     </script>
   </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+  <body class="bgColor">
     <%- include ../menu.ejs -%>
 
-    <b>All Member</b>
+    <div class="sub_navbar">
+      <ul class="sub_nav">
+        <div class="section">
+          <li>
+            <b>all Member</b>
+          </li>
+          <li>
+            <a href="/subscriptions/new">Add Memeber</a>
+          </li>
+        </div>
+        
+      </ul>
+    </div>
 
-    <a href="/subscriptions/new">Add Memeber</a>
+    <div class="content">
 
-    <% subscriptionsMovies.forEach(sm =>{ %>
-      <div class="card" style="width: 28rem;">
-        <div class="card-body">
-          <input type="hidden" name="memberId" value="<%= sm.id  %>">
-          <h5 class="card-title"><%= sm.name %></h5>
-          <p class="card-text">Email: <%= sm.email %></p>
-          <p class="card-text">City: <%= sm.city %></p>
+      <h1><%= title %></h1>
+      
+      <% subscriptionsMovies.forEach(sm =>{ %>
+        <div class="card">
+          <div class="card-body subscription">
+            <div class="member">
+              <input type="hidden" name="memberId" value="<%= sm.id  %>">
+              <h5 class="card-title"><%= sm.name %></h5>
+              <p class="card-text">Email: <%= sm.email %></p>
+              <p class="card-text">City: <%= sm.city %></p>
 
-          <a href="/subscriptions/edit/<%= sm._id %>" class="btn btn-primary">Edit</a>
-          <a href="/subscriptions/delete/<%= sm._id %>" class="btn btn-primary">Delete</a>
-
-          <div class="card-text">
-            <h5> Movie Watched</h5>
-            <button onclick=subscribeToMovie("<%= sm.id  %>")>Subscribe to new movie</button>
-            <div class="hide" id="hide_<%= sm.id %>">
-                <form action="/subscriptions/subscribe" method="POST">
-                  <h6>Add a new movie</h6>
-                 <input type="hidden" name="memberId" value="<%= sm.id %>"/>
-                <select name="unwatch" id="unwatch">
-                  <% sm.unwatched.forEach(uw =>{ %>
-                    <option value="<%= uw._id %>"><%= uw.name %></option>
-
-                  <% })  %>
-                </select>
-
-                <input type="date" name="watchedDate">
-
-                <input type="submit" value="Subscribe">
-
-                </form>
+              <button class="btn btn-primary">
+                <a href="/subscriptions/edit/<%= sm._id %>">Edit</a>
+              </button>
+              <button class="btn btn-primary">
+                <a href="/subscriptions/delete/<%= sm._id %>">Delete</a>
+              </button>
             </div>
-            <div>
-              <ul>
-                <% sm.movies.forEach(m =>{ %>
-                  <li><a href="/movies/<%= m.movieId %>"><%= m.movieName %></a>, <%= (new Date(m.watchDate)).toLocaleDateString('en-Gb') %></li>
+            <div class="card-text movieWatched">
+              <h5> Movie Watched</h5>
+              <button class="btn btn-primary btn-sm subscribeMovie" onclick=subscribeToMovie("<%= sm.id  %>")>Subscribe to new movie</button>
+              <div class="hide" id="hide_<%= sm.id %>">
+                  <form action="/subscriptions/subscribe" method="POST">
+                    <h6>Add a new movie</h6>
+                  <input type="hidden" name="memberId" value="<%= sm.id %>"/>
+                  <select name="unwatch" id="unwatch">
+                    <% sm.unwatched.forEach(uw =>{ %>
+                      <option value="<%= uw._id %>"><%= uw.name %></option>
 
-                <% }) %>
-              </ul>
+                    <% })  %>
+                  </select>
+
+                  <input type="date" name="watchedDate">
+
+                  <button type="submit" class="btn btn-primary btn-sm subscribe">Subscribe</button>
+
+                  </form>
+              </div>
+              <div class="subscribers">
+                <ul>
+                  <% sm.movies.forEach(m =>{ %>
+                    <li><a href="/movies/<%= m.movieId %>"><%= m.movieName %></a>, <%= (new Date(m.watchDate)).toLocaleDateString('en-Gb') %></li>
+
+                  <% }) %>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <% }) %>
+        <% }) %>
+    </div>
   </body>
 </html>

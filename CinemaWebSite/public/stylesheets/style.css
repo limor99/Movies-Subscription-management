@@ -1,6 +1,6 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  color: red!important;
+  color: white!important;
   background-color: black!important;
   background-image: url("/images/cinema.png");
   background-repeat: no-repeat;
@@ -11,13 +11,18 @@ body {
 }
 
 a {
-  color: red!important;
+  color: white!important;
   
 }
 
 button{
   background-color: red!important;
   border-color: #ffcccc!important;
+  box-shadow: none!important;
+}
+
+select{
+  height: 1.87rem;;
 }
 
 .welcome{
@@ -104,12 +109,12 @@ nav li a{
 .section{
   display: flex;
   justify-content: space-between;
-  width: 17%;
+  width: 20%;
   line-height: 2.4rem;
 }
 
 .find{
-  width: 80%;
+  width: 75%;
 }
 
 
@@ -129,8 +134,8 @@ nav li a{
 }
 
 .card{
-  width: 50%;
-  background-image: linear-gradient(black, white);
+  /*width: 50%;*/
+  background-image: linear-gradient(black, #CAC7C6);
   margin-bottom: 1rem;
   border-top: 1px solid black!important;
   border-left: 1px solid red!important;
@@ -141,6 +146,13 @@ nav li a{
   padding-bottom: 1rem;
 }
 
+
+.msg{
+  /*color: red;
+  background-color: white;
+  width: 30%;*/
+  margin-bottom: 1rem;
+}
 
 /* end global */
 
@@ -170,15 +182,43 @@ nav li a{
 
 /* end movies */
 
+/* subscriptions page */
+
+.subscription{
+  display: flex;
+  justify-content: space-between;
+  
+  
+}
+
+.member{
+  width: 40%;
+}
+
+.movieWatched{
+  flex-direction: column;
+  width: 60%;
+}
+
+.subscribeMovie{
+  width: 30%;
+  margin-bottom: 0.5rem;
+}
+
+.subscribe{
+  margin-top: -0.25rem;
+}
+
+.subscribers{
+  margin-top: 0.5rem;
+}
+
 .hide{
   display: none;
 }
 
-.msg{
-  /*color: red;
-  background-color: white;
-  width: 30%;*/
-  margin-bottom: 1rem;
-}
+/* end subscriptions */
+
+
 
 
