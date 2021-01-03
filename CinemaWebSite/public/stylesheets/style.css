@@ -31,7 +31,7 @@ select{
 
 }
 
-.login .form-group{
+.login .form-group, .add .form-group{
   width: 30%;
 }
 
@@ -171,12 +171,12 @@ nav li a{
 }
 
 .container{
-  background-image: linear-gradient(black, white);
+  background-image: linear-gradient(black, #CAC7C6);
   margin-bottom: 1rem;
   border-top: 1px solid black!important;
   border-left: 1px solid red!important;
   margin-left: 0!important;
-  width: 50%!important;
+  
 
 }
 
