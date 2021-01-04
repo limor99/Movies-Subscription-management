@@ -18,7 +18,11 @@ router.get('/', checkPermissions("View Subscriptions"), async function(req, res,
   }  
 });
 
-router.get('/:id', checkPermissions("View Subscriptions"), async function(req, res, next) {
+router.get('/new', checkPermissions("Create Subscriptions"), function(req, res, next) {
+  res.render('subscriptions/newMember', { title : "Add Member Page"});
+});
+
+router.get('/edit/:id', checkPermissions("Update Subscriptions"), async function(req, res, next) {
   let member = null;
   let memberId = req.params.id;
   
@@ -28,10 +32,10 @@ router.get('/:id', checkPermissions("View Subscriptions"), async function(req, r
     if(answer.success){
       member = answer.member;
       
-      res.render('subscriptions/member', { title : "Member Page", member : member});
+      res.render('subscriptions/editMember', { title : "Member Page", member : member});
     }
     else{
-      res.send(`An error occured while trying to get data of member: ${memberId}`);
+      res.send(`An error occured while trying to update member: ${memberId}`);
     }
 
   }
@@ -41,9 +45,6 @@ router.get('/:id', checkPermissions("View Subscriptions"), async function(req, r
   }
 });
 
-router.get('/new', checkPermissions("Create Subscriptions"), function(req, res, next) {
-  res.render('subscriptions/newMember', { title : "Add Member Page"});
-});
 
 router.post('/new/add', async function(req, res, next) {
   let name = req.body.name;
@@ -74,7 +75,8 @@ router.post('/new/add', async function(req, res, next) {
   
 });
 
-router.get('/edit/:id', checkPermissions("Update Subscriptions"), async function(req, res, next) {
+
+router.get('/:id', checkPermissions("View Subscriptions"), async function(req, res, next) {
   let member = null;
   let memberId = req.params.id;
   
@@ -84,10 +86,10 @@ router.get('/edit/:id', checkPermissions("Update Subscriptions"), async function
     if(answer.success){
       member = answer.member;
       
-      res.render('subscriptions/editMember', { title : "Member Page", member : member});
+      res.render('subscriptions/member', { title : "Member Page", member : member});
     }
     else{
-      res.send(`An error occured while trying to update member: ${memberId}`);
+      res.send(`An error occured while trying to get data of member: ${memberId}`);
     }
 
   }
@@ -96,6 +98,7 @@ router.get('/edit/:id', checkPermissions("Update Subscriptions"), async function
     res.send('An error occured while trying to get the member: ${memberId} data');
   }
 });
+
 
 router.post('/update', async function(req, res, next) {
   let memberId = req.body.id;

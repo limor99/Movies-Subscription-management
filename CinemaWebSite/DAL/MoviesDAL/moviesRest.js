@@ -1,4 +1,3 @@
-//const { request } = require("express")
 const moviesRestUrl = 'http://localhost:8000/api/movies/';
 
 const axios = require('axios');

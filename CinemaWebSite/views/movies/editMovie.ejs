@@ -4,17 +4,27 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
-  <body>
-    
-    <h1><%= title %></h1>
+  <body class="bgColor">
     <%- include ../menu.ejs -%>
-    <a href="/movies">All Movies</a> &nbsp;  <p>Add Movie</p> 
 
+    <div class="sub_navbar">
+      <ul class="sub_nav">
+        <div class="section">
+          <li>
+            <a href="/movies">All Movies</a>
+          </li>
+          <li>
+            <b>Add Movie</b> 
+          </li>
+        </div>
+        
+      </ul>
+    </div>
+
+  <div class="content">
     <h3>Edit Movie: <%= movie.name %></h3>
-    
-
     <div class="container">
-      <form action="/movies/update" method="POST">
+      <form action="/movies/update" method="POST" class="editForm">
         <div><input type="hidden" name="id" value=<%= movie._id %>></div>
 
         <div class="form-group">
@@ -41,6 +51,7 @@
       </form>
       
     </div>
+  </div>
 
 
   </body>
