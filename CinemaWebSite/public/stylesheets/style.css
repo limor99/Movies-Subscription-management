@@ -156,6 +156,19 @@ nav li a{
 
 /* end global */
 
+.twoColumns{
+  display: flex;
+  
+}
+
+.columns{
+  width: 50%;
+}
+
+.columns .form-group{
+  width: 60%;
+}
+
 /* movies page */ 
 .card-text{
   display: flex;

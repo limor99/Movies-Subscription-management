@@ -41,50 +41,54 @@
       <h1><%= title %></h1>
 
       <div class="container">
-        
         <form action="/users/new/add" method="POST" class="addForm">
-          <div class="form-group">
-            <label for="firstName">First Name:</label>
-            <input type="text" class="form-control" id="firstName" name="firstName">
+          <div class="twoColumns">
+            <div class="columns">
+              <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" class="form-control" id="firstName" name="firstName">
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" class="form-control" id="lastName" name="lastName">
+              </div>
+              <div class="form-group">
+                <label for="username">User Name:</label>
+                <input type="text" class="form-control" id="username" name="username">
+              </div>
+              <div class="form-group">
+                <label for="sessionTimeOut">Session TimeOut (Minute):</label>
+                <input type="text" class="form-control" id="sessionTimeOut" name="sessionTimeOut">
+              </div>
+
+              <button type="submit" class="btn btn-primary">Save</button>
+
+              <button class="btn btn-primary">
+                <a href="/users">Cancel</a>  
+              </button>
+            </div>
+            <div class="columns">
+              <div class="form-group">
+                <label >Permisions:</label><br>
+                <input type="checkbox" name="viewSubscriptions" value="viewSubscriptions">
+                <label for="viewSubscriptions">View Subscriptions</label><br>
+                <input type="checkbox" name="createSubscriptions" value="createSubscriptions">
+                <label for="createSubscriptions">Create Subscriptions</label><br>
+                <input type="checkbox" name="deleteSubscriptions" value="deleteSubscriptions">
+                <label for="deleteSubscriptions">Delete Subscriptions</label><br>
+                <input type="checkbox" name="updateSubscriptions" value="updateSubscriptions">
+                <label for="updateSubscriptions">Update Subscriptions</label><br>
+                <input type="checkbox" name="viewMovies" value="viewMovies">
+                <label for="viewMovies">View Movies</label><br>
+                <input type="checkbox" name="createMoies" value="createMovies">
+                <label for="createMovies">Create Movies</label><br>
+                <input type="checkbox" name="deleteMovies" value="deleteMovies">
+                <label for="deleteMovies">Delete Movies</label><br>
+                <input type="checkbox" name="updateMovies" value="updateMovies">
+                <label for="updateMovies">Update Movies</label><br>
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="lastName">Last Name:</label>
-            <input type="text" class="form-control" id="lastName" name="lastName">
-          </div>
-          <div class="form-group">
-            <label for="username">User Name:</label>
-            <input type="text" class="form-control" id="username" name="username">
-          </div>
-          <div class="form-group">
-            <label for="sessionTimeOut">Session TimeOut (Minute):</label>
-            <input type="text" class="form-control" id="sessionTimeOut" name="sessionTimeOut">
-          </div>
-          <div class="form-group">
-            <label >Permisions:</label><br>
-            <input type="checkbox" name="viewSubscriptions" value="viewSubscriptions">
-            <label for="viewSubscriptions">View Subscriptions</label><br>
-            <input type="checkbox" name="createSubscriptions" value="createSubscriptions">
-            <label for="createSubscriptions">Create Subscriptions</label><br>
-            <input type="checkbox" name="deleteSubscriptions" value="deleteSubscriptions">
-            <label for="deleteSubscriptions">Delete Subscriptions</label><br>
-            <input type="checkbox" name="updateSubscriptions" value="updateSubscriptions">
-            <label for="updateSubscriptions">Update Subscriptions</label><br>
-            <input type="checkbox" name="viewMovies" value="viewMovies">
-            <label for="viewMovies">View Movies</label><br>
-            <input type="checkbox" name="createMoies" value="createMovies">
-            <label for="createMovies">Create Movies</label><br>
-            <input type="checkbox" name="deleteMovies" value="deleteMovies">
-            <label for="deleteMovies">Delete Movies</label><br>
-            <input type="checkbox" name="updateMovies" value="updateMovies">
-            <label for="updateMovies">Update Movies</label><br>
-          </div>
-          
-          <button type="submit" class="btn btn-primary">Save</button>
-          
-              <a href="/users">
-                <button type="button" class="btn btn-primary">Cancel</button>
-              </a>
-          
         </form>
 
       </div>
