@@ -4,8 +4,10 @@ var router = express.Router();
 
 const usersBl = require('../models/Users/usersBL');
 
+const checkSessionTimeout = require('../middlewares/checkSessionTimeout');
+
 /* GET users listing. */
-router.get('/', async function(req, res, next) {
+router.get('/', checkSessionTimeout(), async function(req, res, next) {
   let users = await usersBl.getAllUsers();
   if(users){
     res.render('users/users', { title : "All Users Page", users: users});  
@@ -17,7 +19,7 @@ router.get('/', async function(req, res, next) {
   
 });
 
-router.post('/new/add', async function(req, res, next) {
+router.post('/new/add', checkSessionTimeout(), async function(req, res, next) {
     let firstName = req.body.firstName;
     let lastName = req.body.lastName;
     let username = req.body.username;
@@ -61,7 +63,7 @@ router.post('/new/add', async function(req, res, next) {
 });
 
 
-router.post('/update', async function(req, res, next) {
+router.post('/update', checkSessionTimeout(), async function(req, res, next) {
   let id = req.body.id;
   let firstName = req.body.firstName;
   let lastName = req.body.lastName;
@@ -108,11 +110,11 @@ router.post('/update', async function(req, res, next) {
 
 });
 
-router.get('/new', function(req, res, next) {
+router.get('/new', checkSessionTimeout(), function(req, res, next) {
   res.render('users/newUser', { title : "Add User Page"});
 });
 
-router.get('/edit/:id', async function(req, res, next) {
+router.get('/edit/:id', checkSessionTimeout(), async function(req, res, next) {
   let userId = req.params.id;
   let user = await usersBl.getUserById(userId);
 
@@ -126,7 +128,7 @@ router.get('/edit/:id', async function(req, res, next) {
   
 });
 
-router.get('/delete/:id', async function(req, res, next){
+router.get('/delete/:id', checkSessionTimeout(), async function(req, res, next){
   let userId = req.params.id;
   let isDeleted = await usersBl.deleteUser(userId);
   if(isDeleted){
@@ -144,11 +146,11 @@ router.get('/delete/:id', async function(req, res, next){
 });
 
 
-router.get('/createAccount', function(req, res, next) {
+router.get('/createAccount', checkSessionTimeout(), function(req, res, next) {
   res.render('users/createAccountPage', { data : "Create Account Page", msg:''});
 });
 
-router.post('/newAccount', async function(req, res, next){
+router.post('/newAccount', checkSessionTimeout(), async function(req, res, next){
   let username = req.body.username;
   let password = req.body.password;
 

@@ -18,9 +18,6 @@ const checkPermissions = function (permission){
                 res.render('main', {title: "Main Page", message: `You have no permission for ${permission}`});
             }
         }
-        else{   //for session timeout
-            res.render('login', {data : 'Login Page', message: 'Session timeout, please login'})
-        }
     }
 
 }

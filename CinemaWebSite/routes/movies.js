@@ -6,10 +6,11 @@ const moviesBL = require('../models/Movies/moviesBL');
 const subscribeBL = require('../models/Members/subscribeBL');
 const movieSubscriberBL = require('../models/Movies/movieSubscribersBL');
 
+const checkSessionTimeout = require('../middlewares/checkSessionTimeout');
 const checkPermissions =  require('../middlewares/checkPermissions');
 
 /* GET mobvies listing. */
-router.get('/', checkPermissions("View Movies"), async function(req, res, next) {
+router.get('/', checkSessionTimeout(), checkPermissions("View Movies"), async function(req, res, next) {
   let moviesSubscribed = await movieSubscriberBL.getAllMovies();
   
   if(moviesSubscribed){
@@ -21,7 +22,7 @@ router.get('/', checkPermissions("View Movies"), async function(req, res, next) 
   
 });
 
-router.post('/new/add', async function(req, res, next) {
+router.post('/new/add', checkSessionTimeout(), async function(req, res, next) {
   let name = req.body.name;
   let genres = req.body.genres;
   let url = req.body.imageUrl;
@@ -57,7 +58,7 @@ router.post('/new/add', async function(req, res, next) {
 
 });
 
-router.post('/update', async function(req, res, next) {
+router.post('/update', checkSessionTimeout(), async function(req, res, next) {
   let movieId = req.body.id;
   let name = req.body.name;
   let genres = req.body.genres;
@@ -98,11 +99,11 @@ router.post('/update', async function(req, res, next) {
   console.log("end post update")
 });
 
-router.get('/new', checkPermissions("Create Movies"), function(req, res, next) {
+router.get('/new', checkSessionTimeout(), checkPermissions("Create Movies"), function(req, res, next) {
   res.render('movies/newMovie', { title : "Add Movies Page"});
 });
 
-router.get('/edit/:id', checkPermissions("Update Movies"), async function(req, res, next) {
+router.get('/edit/:id', checkSessionTimeout(), checkPermissions("Update Movies"), async function(req, res, next) {
   let movie = null;
   let movieId = req.params.id;
   
@@ -129,7 +130,7 @@ router.get('/edit/:id', checkPermissions("Update Movies"), async function(req, r
 
 });
 
-router.get('/delete/:id', checkPermissions("Delete Movies"), async function(req, res, next) {
+router.get('/delete/:id', checkSessionTimeout(), checkPermissions("Delete Movies"), async function(req, res, next) {
   let movieId = req.params.id;
 
   let answer1 = await subscribeBL.deleteMovieSubscribers(movieId);
@@ -154,7 +155,7 @@ router.get('/delete/:id', checkPermissions("Delete Movies"), async function(req,
 
 });
 
-router.get('/:id', checkPermissions("View Movies"), async function(req, res, next) {
+router.get('/:id', checkSessionTimeout(), checkPermissions("View Movies"), async function(req, res, next) {
   let id = req.params.id;
   let response = await moviesBL.getMovieById(id);
   
@@ -168,7 +169,7 @@ router.get('/:id', checkPermissions("View Movies"), async function(req, res, nex
   
 });
 
-router.post('/search', checkPermissions("View Movies"), async function(req, res, next) {
+router.post('/search', checkSessionTimeout(), checkPermissions("View Movies"), async function(req, res, next) {
   let searchText = req.body.search;
 
   let searchResult = await movieSubscriberBL.searchMovie(searchText);

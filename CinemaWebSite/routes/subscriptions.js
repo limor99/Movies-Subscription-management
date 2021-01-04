@@ -4,10 +4,10 @@ var router = express.Router();
 const membersBL = require('../models/Members/memberBL');
 const subscriptionsMoviesBL = require('../models/Members/subscriptionsMoviesBL');
 
-
+const checkSessionTimeout = require('../middlewares/checkSessionTimeout');
 const checkPermissions =  require('../middlewares/checkPermissions');
 
-router.get('/', checkPermissions("View Subscriptions"), async function(req, res, next) {
+router.get('/', checkSessionTimeout(), checkPermissions("View Subscriptions"), async function(req, res, next) {
   let subscriptionsMovies =await subscriptionsMoviesBL.getSubscriptionsMovies();
 
   if(subscriptionsMovies){
@@ -18,11 +18,11 @@ router.get('/', checkPermissions("View Subscriptions"), async function(req, res,
   }  
 });
 
-router.get('/new', checkPermissions("Create Subscriptions"), function(req, res, next) {
+router.get('/new', checkSessionTimeout(), checkPermissions("Create Subscriptions"), function(req, res, next) {
   res.render('subscriptions/newMember', { title : "Add Member Page"});
 });
 
-router.get('/edit/:id', checkPermissions("Update Subscriptions"), async function(req, res, next) {
+router.get('/edit/:id', checkSessionTimeout(), checkPermissions("Update Subscriptions"), async function(req, res, next) {
   let member = null;
   let memberId = req.params.id;
   
