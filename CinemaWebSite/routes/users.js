@@ -146,11 +146,11 @@ router.get('/delete/:id', checkSessionTimeout(), async function(req, res, next){
 });
 
 
-router.get('/createAccount', checkSessionTimeout(), function(req, res, next) {
+router.get('/createAccount', function(req, res, next) {
   res.render('users/createAccountPage', { data : "Create Account Page", msg:''});
 });
 
-router.post('/newAccount', checkSessionTimeout(), async function(req, res, next){
+router.post('/newAccount', async function(req, res, next){
   let username = req.body.username;
   let password = req.body.password;
 
