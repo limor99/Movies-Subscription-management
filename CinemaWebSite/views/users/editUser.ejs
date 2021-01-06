@@ -40,59 +40,64 @@
     <div class="content">
       <h3>Edit User: <%= user.firstName %> <%= user.lastName %></h3>
 
-      <div class="container">
+      <div class="container col-sm-12">
         <form action="/users/update" method="POST" class="addForm">
-          <div class="twoColumns">
-            <div class="columns">
-              <div><input type="hidden" name="id" value=<%= user.id %>></div>
-              
-              <div class="form-group">
-                <label for="firstName">First Name:</label>
-                <input type="text" class="form-control" id="firstName" name="firstName" value=<%= user.firstName %>>
+          <div class="col">
+            <div class="col1 row">
+              <div class="row1 col-md-6">
+                <div><input type="hidden" name="id" value=<%= user.id %>></div>
+                
+                <div class="form-group">
+                  <label for="firstName">First Name:</label>
+                  <input type="text" class="form-control" id="firstName" name="firstName" value=<%= user.firstName %>>
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last Name:</label>
+                  <input type="text" class="form-control" id="lastName" name="lastName" value=<%= user.lastName %>>
+                </div>
+                <div class="form-group">
+                  <label for="username">User Name:</label>
+                  <input type="text" class="form-control" id="username" name="username" value=<%= user.username %>>
+                </div>
+                <div class="form-group">
+                  <label for="sessionTimeOut">Session TimeOut (Minute):</label>
+                  <input type="text" class="form-control" id="sessionTimeOut" name="sessionTimeOut" value=<%= user.sessionTimeOut %>>
+                </div>
+                <div class="form-group">
+                  <label for="createdDate">Created Date:</label>
+                  <input type="text" class="form-control" id="createdDate" name="createdDate" readonly value=<%= user.createdDate %>>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="lastName">Last Name:</label>
-                <input type="text" class="form-control" id="lastName" name="lastName" value=<%= user.lastName %>>
+            
+              <div class="row2 col-md-6">
+                <div class="form-group">
+                  <label >Permisions:</label><br>
+                  <input type="checkbox" name="viewSubscriptions" value="viewSubscriptions" <% if(user.permissions.includes('View Subscriptions')){ %> checked <% } %> >
+                  <label for="viewSubscriptions">View Subscriptions</label><br>
+                  <input type="checkbox" name="createSubscriptions" value="createSubscriptions"  <% if(user.permissions.includes('Create Subscriptions')) %> checked >
+                  <label for="createSubscriptions">Create Subscriptions</label><br>
+                  <input type="checkbox" name="deleteSubscriptions" value="deleteSubscriptions" <% if(user.permissions.includes('Delete Subscriptions')){ %> checked <% } %> >
+                  <label for="deleteSubscriptions">Delete Subscriptions</label><br>
+                  <input type="checkbox" name="updateSubscriptions" value="updateSubscriptions" <% if(user.permissions.includes('Update Subscriptions')){ %> checked <% } %> >
+                  <label for="updateSubscriptions">Update Subscriptions</label><br>
+                  <input type="checkbox" name="viewMovies" value="viewMovies" <% if(user.permissions.includes('View Movies')){ %> checked <% } %> >
+                  <label for="viewMovies">View Movies</label><br>
+                  <input type="checkbox" name="createMovies" value="createMovies" <% if(user.permissions.includes('Create Movies')){ %> checked <% } %> >
+                  <label for="createMovies">Create Movies</label><br>
+                  <input type="checkbox" name="deleteMovies" value="deleteMovies" <% if(user.permissions.includes('Delete Movies')){ %> checked <% } %> >
+                  <label for="deleteMovies">Delete Movies</label><br>
+                  <input type="checkbox" name="updateMovies" value="updateMovies" <% if(user.permissions.includes('Update Movies')){ %> checked <% } %> >
+                  <label for="updateMovies">Update Movies</label><br>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="username">User Name:</label>
-                <input type="text" class="form-control" id="username" name="username" value=<%= user.username %>>
-              </div>
-              <div class="form-group">
-                <label for="sessionTimeOut">Session TimeOut (Minute):</label>
-                <input type="text" class="form-control" id="sessionTimeOut" name="sessionTimeOut" value=<%= user.sessionTimeOut %>>
-              </div>
-              <div class="form-group">
-                <label for="createdDate">Created Date:</label>
-                <input type="text" class="form-control" id="createdDate" name="createdDate" readonly value=<%= user.createdDate %>>
-              </div>
-
+            </div>
+            <div class="col2">
               <button type="submit" class="btn btn-primary">Update</button>
 
               <button class="btn btn-primary">
                 <a href="/users">Cancel</a>
               </button>
-            </div>
-            <div class="columns">
-              <div class="form-group">
-                <label >Permisions:</label><br>
-                <input type="checkbox" name="viewSubscriptions" value="viewSubscriptions" <% if(user.permissions.includes('View Subscriptions')){ %> checked <% } %> >
-                <label for="viewSubscriptions">View Subscriptions</label><br>
-                <input type="checkbox" name="createSubscriptions" value="createSubscriptions"  <% if(user.permissions.includes('Create Subscriptions')) %> checked >
-                <label for="createSubscriptions">Create Subscriptions</label><br>
-                <input type="checkbox" name="deleteSubscriptions" value="deleteSubscriptions" <% if(user.permissions.includes('Delete Subscriptions')){ %> checked <% } %> >
-                <label for="deleteSubscriptions">Delete Subscriptions</label><br>
-                <input type="checkbox" name="updateSubscriptions" value="updateSubscriptions" <% if(user.permissions.includes('Update Subscriptions')){ %> checked <% } %> >
-                <label for="updateSubscriptions">Update Subscriptions</label><br>
-                <input type="checkbox" name="viewMovies" value="viewMovies" <% if(user.permissions.includes('View Movies')){ %> checked <% } %> >
-                <label for="viewMovies">View Movies</label><br>
-                <input type="checkbox" name="createMovies" value="createMovies" <% if(user.permissions.includes('Create Movies')){ %> checked <% } %> >
-                <label for="createMovies">Create Movies</label><br>
-                <input type="checkbox" name="deleteMovies" value="deleteMovies" <% if(user.permissions.includes('Delete Movies')){ %> checked <% } %> >
-                <label for="deleteMovies">Delete Movies</label><br>
-                <input type="checkbox" name="updateMovies" value="updateMovies" <% if(user.permissions.includes('Update Movies')){ %> checked <% } %> >
-                <label for="updateMovies">Update Movies</label><br>
-              </div>
+
             </div>
           </div>
         </form>

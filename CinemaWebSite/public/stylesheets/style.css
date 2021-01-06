@@ -31,7 +31,7 @@ select{
 
 }
 
-.login .form-group, .addForm .form-group, .editForm .form-group{
+.login .form-group{
   width: 30%;
 }
 
@@ -156,6 +156,7 @@ nav li a{
 
 /* end global */
 
+/*
 .twoColumns{
   display: flex;
   
@@ -168,7 +169,7 @@ nav li a{
 .columns .form-group{
   width: 60%;
 }
-
+*/
 /* movies page */ 
 .card-text{
   display: flex;

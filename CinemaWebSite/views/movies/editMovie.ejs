@@ -23,25 +23,25 @@
 
   <div class="content">
     <h3>Edit Movie: <%= movie.name %></h3>
-    <div class="container">
+    <div class="container col-sm-12">
       <form action="/movies/update" method="POST" class="editForm">
         <div><input type="hidden" name="id" value=<%= movie._id %>></div>
 
         <div class="form-group">
           <label for="name">Name:</label>
-          <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" value=<%= movie.name %>>
+          <input type="text" class="form-control col-md-6" id="name" placeholder="Enter name" name="name" value=<%= movie.name %>>
         </div>
         <div class="form-group">
           <label for="genres">Genres:</label>
-          <input type="text" class="form-control" id="genres" placeholder="Enter genres" name="genres" value=<%= movie.genres %>>
+          <input type="text" class="form-control col-md-6" id="genres" placeholder="Enter genres" name="genres" value=<%= movie.genres %>>
         </div>
         <div class="form-group">
           <label for="imageUrl">Image url:</label>
-          <input type="text" class="form-control" id="imageUrl" placeholder="Enter image url" name="imageUrl" value=<%= movie.image.medium %>>
+          <input type="text" class="form-control col-md-6" id="imageUrl" placeholder="Enter image url" name="imageUrl" value=<%= movie.image.medium %>>
         </div>
         <div class="form-group">
           <label for="premiered">Premiered:</label>
-          <input type="date" required class="form-control" id="premiered" placeholder="Enter premierd" name="premiered" value=<%= movie.premiered %>>  
+          <input type="date" required class="form-control col-md-6" id="premiered" placeholder="Enter premierd" name="premiered" value=<%= movie.premiered %>>  
         </div>
         
         <button type="submit" class="btn btn-primary">Save</button>
