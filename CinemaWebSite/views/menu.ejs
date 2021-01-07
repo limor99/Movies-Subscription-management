@@ -1,39 +1,59 @@
 <head>
-  <title><%= title %></title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
-  <!-- for bootstrap -->
-  ​<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-  
 </head>
-<header id="header">
-    <nav class="nav_bar">
-      <ul class="menu">
-        <div class="nav left_nav">
-          <li><a href="/movies">Movies</a>&nbsp;</li>
-          <li><a href="/subscriptions">Subscriptions</a>&nbsp;</li>
-          
-          <% if(user.username === 'admin'){ %>
-            <li>
-              <a href="/users">User's Managemet</a>&nbsp;
-            </li>
-          <% } %>
-        </div>
-        <div class="nav right_nav">
-          <% if(user && user.firstName){ %>
-            <li>
-              Hello <%= user.firstName %> <%= user.lastName %> 
-            </li>
-          <% } %>
 
-          <li><a href="/logout">Logout</a>&nbsp;</li>
-        </div>
-      </ul>
-
-    </nav>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav menu">
+      <div class="leftNav">
+      <% if(user && user.firstName){ %>
+        <div class="userInMd">
+          <li>
+            <%= user.firstName %> <%= user.lastName %> 
+          </li>
     
-</header>
+        </div>
+      <% } %>
+      <li class="nav-item">
+        <a class="nav-link" href="/movies">Movies</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/subscriptions">Subscriptions</a>
+      </li>
+      <% if(user.username === 'admin'){ %>
+      <li class="nav-item">
+        <a class="nav-link" href="/users">User's Managemet</a>
+      </li>
+      <% } %>
+    </div>
+    <div class="rightNav">
+      
+      <% if(user && user.firstName){ %>
+        <div class="userInL">
+          <li class="nav-item">
+            Hello <%= user.firstName %> <%= user.lastName %> 
+          </li>
+        </div>
+      <% } %>
+
+      <li><a  class="nav-item" href="/logout">Logout</a></li>
+
+    </div>  
+    </ul>
+  </div>  
+</nav>
+</body>
+
+
+
+

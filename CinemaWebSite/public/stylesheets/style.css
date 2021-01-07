@@ -2,7 +2,7 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: white!important;
   background-color: black!important;
-  background-image: url("/images/cinema.png");
+  /*background-image: url("/images/cinema.png");*/
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
@@ -25,6 +25,10 @@ select{
   height: 1.87rem;;
 }
 
+nav{
+  background-color: red!important;
+}
+
 .welcome{
   display: flex;
   flex-direction: column;
@@ -37,6 +41,47 @@ select{
 
 .bgColor{
   background-image: none;
+  
+}
+
+.userInMd{
+  display: block ;
+  padding: 0.6rem 0;
+}
+
+.userInL{
+  display: none ;
+}
+
+.rightNav{
+  padding: 0.5rem 0;
+}
+
+@media (min-width: 768px){
+  .userInMd
+  {
+    display: none;
+  }
+
+  .userInL{
+    display: block;
+    padding-right: 1.5rem;
+  }
+
+  .leftNav{
+    display: flex;
+    flex-direction: row!important;
+  }
+
+  .rightNav{
+    display: flex;
+    flex-direction: row!important;
+    padding-top: 0.6rem;
+    justify-content: space-between;
+  
+  
+  }
+
   
 }
 
@@ -56,14 +101,18 @@ select{
 }
 
 .menu{
-  display: flex;
+  
   width: 100%;
+  justify-content: space-between;
+ /* display: flex;
+  
   flex-direction: row;
   background-color: red;
-  color: white;
+    list-style: none;
+
+  color: white;*/
   /*align-content: space-between;*/
-  justify-content: space-between;
-  list-style: none;
+  
 
 }
 
@@ -81,12 +130,12 @@ nav li a{
 
 
 .left_nav{
-  width: 30%;
+  display: flex;
+  flex-direction: column;
 }
 
 .right_nav{
-  width: 20%;
-  margin-right: 2rem;
+  
 }
 
 .sub_navbar{
