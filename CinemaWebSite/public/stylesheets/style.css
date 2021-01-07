@@ -1,14 +1,38 @@
 body {
+  /*
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: white!important;
   background-color: black!important;
-  /*background-image: url("/images/cinema.png");*/
+  background-image: url("/images/cinema.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
   background-size: auto;
   max-height: 0;
-}
+
+*/
+
+   /* Location of the image */
+   background-image: url("/images/cinema.png");
+  
+  /* Background image is centered vertically and horizontally at all times */
+  background-position: center center;
+  
+  /* Background image doesn't tile */
+  background-repeat: no-repeat;
+  
+  /* Background image is fixed in the viewport so that it doesn't move when 
+     the content's height is greater than the image's height */
+  background-attachment: fixed;
+  
+  /* This is what makes the background image rescale based
+     on the container's size */
+  background-size: cover;
+  
+  /* Set a background color that will be displayed
+     while the background image is loading */
+     background-color: black!important;
+    }
 
 a {
   color: white!important;
@@ -29,11 +53,41 @@ nav{
   background-color: red!important;
 }
 
-.welcome{
-  display: flex;
-  flex-direction: column;
-
+/*
+.cinameImg {
+  width: 100%;
+  height: auto;
 }
+
+*/
+.central{  
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-47%, -50%);
+  width: 38%;
+  height: 30%;
+  padding: 20px;  
+  color: white;
+  text-align: center;
+   
+}
+
+.welcome{
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    color: black;
+    font-size: 1.1em;
+}
+
+.welcome a{
+  color: black!important;
+  text-decoration: none;
+  color: #A31818!important;
+}
+
 
 .login .form-group{
   width: 30%;
