@@ -13,25 +13,30 @@
 
   </head>
   <body class="bgColor">
-    <h1><%= data %></h1>
+    
     
 
-    <div class="container">
-        <%= msg %>
-
-      <form action="/users/newAccount" method="POST">
-        <div class="form-group">
-          <label for="username">Username:</label>
-          <input type="username" class="form-control" id="username" placeholder="Enter username" name="username">
+    <div class="centralLogin">
+      <div class="centralDiv">
+        <h1 class="pageTitle col"><%= data %></h1>
+        <div class="col msg">
+          <b><%= msg %></b>
         </div>
-        <div class="form-group">
-          <label for="pwd">Password:</label>
-          <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
-        </div>
-        
-        <button type="submit" class="btn btn-primary">Create</button>
-      </form>
-
+        <form action="/users/newAccount" method="POST">
+          
+          <div class="form-group col-md-6">
+            <label for="username">Username:</label>
+            <input type="username" class="form-control" id="username" placeholder="Enter username" name="username">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+          </div>
+          <div class="form-group col-md-6">
+            <button type="submit" class="btn btn-primary">Create</button>
+          </div>  
+        </form>
+      </div>
     </div>
   </body>
 </html>

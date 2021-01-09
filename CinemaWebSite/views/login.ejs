@@ -11,13 +11,14 @@
   </head>
   <body>
     
-    <% if(message){ %>
-      <div class="msg">
-      <%= message %>
-    </div>
-    <% } %>  
+      
     <div class="centralLogin">
       <div class="centralDiv">
+        <% if(message){ %>
+          <div class="col msg">
+          <b><%= message %></b>
+        </div>
+        <% } %>
         <div class="col-sm-12 col-md-6">
           <form action="/main" method="POST">
             <div class="form-group">

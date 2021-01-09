@@ -32,6 +32,7 @@ body {
   /* Set a background color that will be displayed
      while the background image is loading */
      background-color: black!important;
+     color: white!important;
     }
 
 a {
@@ -52,6 +53,7 @@ select{
 nav{
   background-color: red!important;
 }
+
 
 /*
 .cinameImg {
@@ -87,8 +89,8 @@ nav{
 
 .centralDiv{
   position: absolute;
-  top: 25%;
-  left: 5%;
+  top: 20%;
+  left: 10%;
   width: 100%;
   padding-right: 4rem;
 
@@ -97,6 +99,10 @@ nav{
 .newUser{
   padding-top: 0.5rem;
   font-size: 0.8em;;
+}
+
+.pageTitle{
+  font-size: 3vw;
 }
 
 .welcome{
@@ -277,10 +283,10 @@ nav li a{
 
 
 .msg{
-  /*color: red;
-  background-color: white;
-  width: 30%;*/
-  margin-bottom: 1rem;
+  color: red;
+  /*background-color: white;
+  display: inline-block;
+  margin-bottom: 1rem;*/
 }
 
 /* end global */
