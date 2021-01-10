@@ -55,13 +55,6 @@ nav{
 }
 
 
-/*
-.cinameImg {
-  width: 100%;
-  height: auto;
-}
-
-*/
 .central{  
   position: absolute;
   left: 50%;
@@ -112,6 +105,11 @@ nav{
     width: 100%;
     color: black;
     font-size: 1.1em;
+}
+
+.desc{
+  font-size: 1.9vw;
+  margin-bottom: 2rem;
 }
 
 .welcome a{
