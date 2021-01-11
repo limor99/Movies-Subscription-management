@@ -17,13 +17,13 @@
         <div class="container-fluid">
           <div class="row">
             <% if(message){ %>
-          <div class="col msg">
-            <b><%= message %></b>
+            <div class="col-md-12 msg">
+              <b><%= message %></b>
+            </div>
+            <% } %>
           </div>
-          <% } %>
-        </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <form action="/main" method="POST">
               <div class="form-group">
                 <label for="username">Username:</label>
@@ -37,7 +37,10 @@
               <button type="submit" class="btn btn-primary btn-sm">Login</button>
               
             </form>
-            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
             <div class="newUser">New user? <a href="/users/createAccount">Create Acount</a></div>
           </div>
         </div>

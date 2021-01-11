@@ -8,27 +8,29 @@
     
     <%- include ../menu.ejs -%>
 
-    <div class="sub_navbar">
-      <ul class="sub_nav">
-        <div class="section">
-          <li>
+    <div class="container-fluid">
+      <div class="row section">
+        <div class="col-md-4">
+          <div class="allTitle">
             <b>all movies</b>
-          </li>
-          <li>
-            <a href="/movies/new">Add Movie</a>
-          </li>
+          </div>
+
+          <a href="/movies/new">Add Movie</a>
         </div>
-        <div class="find">
+        <div class="col-md-6 find">
           <form action="/movies/search" method="POST" class="search">
-            <div class="form-group mx-sm-3 mb-2" class="searchText">
+            <div class="form-group mb-2 searchText">
               <label for="search" class="sr-only">Find Movie</label>
               <input type="text" class="form-control" id="search" name="search" placeholder="Find Movie">
             </div>
             <button type="submit" class="btn btn-primary mb-2">Find</button>
           </form>
         </div>
-      </ul>
+        
+      </div>
     </div>
+
+    
 
     <div class="content">
       <h1><%= title %></h1>
