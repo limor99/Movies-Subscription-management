@@ -50,7 +50,9 @@ exports.getMovieById = async function(id){
 exports.searchMovies = async function(text){
     let movies = null;
     try{
-        movies = await Movie.find({name:{ $regex: '.*' + text + '.*' } })
+        //movies = await Movie.find({name:{ $regex: '.*' + text + '.*' } })
+        movies = await Movie.find({name: {$regex: text, $options: 'i'}});
+                  
     }
     catch(err){
         console.log(`An error occured while try to get movie data: ${text}: ${err}`);
