@@ -9,7 +9,7 @@ const movieSubscriberBL = require('../models/Movies/movieSubscribersBL');
 const checkSessionTimeout = require('../middlewares/checkSessionTimeout');
 const checkPermissions =  require('../middlewares/checkPermissions');
 
-/* GET mobvies listing. */
+/* GET movies listing. */
 router.get('/', checkSessionTimeout(), checkPermissions("View Movies"), async function(req, res, next) {
   let moviesSubscribed = await movieSubscriberBL.getAllMovies();
   
@@ -161,7 +161,7 @@ router.get('/:id', checkSessionTimeout(), checkPermissions("View Movies"), async
   
   if(response.success){
     let movie = response.movie;
-    res.render('movies/movie', { title : "Movie Page", msg: '', movie : movie});
+    res.render('movies/movies', { title : "Movie Page", msg: '', movies : movie});
   }
   else{
     res.render('main', { title : "Main Page", msg: '', message: `An error occured while try get movie's data. movie's id: ${id}`});

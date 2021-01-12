@@ -4,25 +4,34 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
-  <body>
-    
-    <h1><%= title %></h1>
+  <body class="bgColor">
     <%- include ../menu.ejs -%>
 
-    <div>
-      <a href="/movies">All Movies</a>&nbsp;
-      <a href="/movies/new">Add Movie</a>
+    <div class="container-fluid">
+      <div class="row section">
+        <div class="col-md-4">
+          <div class="allTitle">
+            <a href="/movies">All Movies</a>
+          </div>
+
+          <a href="/movies/new">Add Movie</a>
+        </div>
+        
+      </div>
     </div>
 
-    <b>Movie: <%= movie.name %></b>
+    <div class="content">
 
-      <div class="card" style="width: 28rem;">
+      <h1>Movie: <%= movie.name %></h1>
+
+      <div class="card">
         <div class="card-body">
-          <p class="card-text">Name: <%= movie.name %></p>
-          <p class="card-text">Genres: <%= movie.genres %></p>
-          <p class="card-text">Image url: <%= movie.image.medium %></p>
-          <p class="card-text">Premiered: <%= (new Date(movie.premiered)).toLocaleDateString('en-Gb') %></p>
+          <div class="card-text">Name: <%= movie.name %></div>
+          <div class="card-text">Genres: <%= movie.genres %></div>
+          <div>Image url: <%= movie.image.medium %></div>
+          <div class="card-text">Premiered: <%= (new Date(movie.premiered)).toLocaleDateString('en-Gb') %></div>
         </div>
       </div>
+    </div>
   </body>
 </html>

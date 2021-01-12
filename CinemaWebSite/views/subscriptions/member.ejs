@@ -4,24 +4,31 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+  <body class="bgColor">
     <%- include ../menu.ejs -%>
 
-    <div>
-      <a href="/subscriptions">All Members</a> &nbsp; 
-      <a href="/subscriptions/new">Add Memeber</a>
+    <div class="container-fluid">
+      <div class="row section">
+        <div class="col-md-4">
+          <div class="allTitle">
+            <a href="/subscriptions">All Members</a>
+          </div>
+
+          <a href="/subscriptions/new">Add Memeber</a> 
+        </div>
+      </div>
     </div>
 
-    <b>Member: <%= member.name %></b>
-      <div class="card" style="width: 28rem;">
+    <div class="content">
+      <h1>Member: <%= member.name %></h1>
+      <div class="card">
         <div class="card-body">
           <p class="card-text">Name: <%= member.name %></p>
           <p class="card-text">Email: <%= member.email %></p>
           <p class="card-text">City: <%= member.city %></p>
         </div>
       </div>
+    </div>
      
   </body>
 </html>
