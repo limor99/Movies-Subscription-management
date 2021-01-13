@@ -116,14 +116,14 @@ router.post('/update', async function(req, res, next) {
   let answer = await membersBL.updateMember(member);
 
   if(answer != null){
-    let members = await membersBL.getMembers();
-    if(members){
-      res.render('subscriptions/subscriptions', { title : "Member Page", msg : answer.msg, members: members});  
+    let subscriptionsMovies = await subscriptionsMoviesBL.getSubscriptionsMovies();
+
+    if(subscriptionsMovies){
+      res.render('subscriptions/subscriptions', { title: 'Subscriptions Page' , msg: answer.msg, subscriptionsMovies : subscriptionsMovies});
     }
     else{
-      res.send('member Updated, but an error occured while trying to get all members');
+      res.send('member Updated, but an error occured while trying to get all members with there subscribed movies');
     }
-
   }
   else{
     //genereal error

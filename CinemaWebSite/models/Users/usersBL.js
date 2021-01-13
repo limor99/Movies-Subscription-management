@@ -87,12 +87,10 @@ exports.getAllUsers = async function(){
     let usersFromDB = await User.find({});
     //4. data shaping
     if(users != undefined && usersPermissions != undefined){
-let i = 0;
-
         usersData = users.map(user =>{
             let userPermissions = usersPermissions.filter(permission => permission.id === user.id);
             let userFromDB = usersFromDB.filter(u => u.id === user.id);
-console.log("i:" + i++, userFromDB[0]);
+
         return {
                 id: user.id,
                 firstName: user.firstName, 
@@ -113,12 +111,12 @@ console.log("i:" + i++, userFromDB[0]);
 exports.getUserById = async function(userId){
     let users = null;
     let user = null;
-    users = await this.getAllUsers();
+    users = await exports.getAllUsers();
     if(users){
         user = users.filter(user => user.id === userId)[0];
     }
     else{
-        console.log(`An error occured while try to read user: ${userId} from file: ${err}`);
+        console.log(`An error occured while try to read user: ${userId} from file`);
     }
 
     return user;
@@ -143,7 +141,6 @@ exports.updateUser = async function(updateUser){
 
     // 1. update the user.json
     if(users){
-        console.table(users);
         let index = users.findIndex(user => user.id === userToUpdate.id);
         users[index] = userToUpdate;
         console.table(users);
@@ -154,14 +151,20 @@ exports.updateUser = async function(updateUser){
             "permissions" : updateUser.permissions
         }
 
-        //2. update the permissions.json
         let usersPermissions = await permissionDal.readPermissions();
         let indexPermossions = usersPermissions.findIndex(per => per.id === userPermissionsToUpdate.id);
         usersPermissions[indexPermossions] = userPermissionsToUpdate;
 
-        isUpdateUserPermissions = permissionDal.writePermissions(usersPermissions);
+        isUpdateUserPermissions = await permissionDal.writePermissions(usersPermissions);
 
-        if(isUpdateUser && isUpdateUserPermissions){
+        //3. update user in db
+        let userForDB = {
+            "username" : updateUser.username
+        }
+
+        let updateUserInDB = await User.findByIdAndUpdate(updateUser.id, userForDB);
+
+        if(isUpdateUser && isUpdateUserPermissions && updateUserInDB){
             isUpdate = true;
         }
 

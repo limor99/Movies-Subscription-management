@@ -2,7 +2,8 @@
 <html>
   <head>
     <title><%= title %></title>
-     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <script>
       $(document).ready(function(){
         $('input[type="checkbox"]').click(function(){
@@ -48,23 +49,23 @@
                 
                 <div class="form-group">
                   <label for="firstName">First Name:</label>
-                  <input type="text" class="form-control" id="firstName" name="firstName" value=<%= user.firstName %>>
+                  <input type="text" class="form-control" id="firstName" name="firstName" value="<%= user.firstName %>">
                 </div>
                 <div class="form-group">
                   <label for="lastName">Last Name:</label>
-                  <input type="text" class="form-control" id="lastName" name="lastName" value=<%= user.lastName %>>
+                  <input type="text" class="form-control" id="lastName" name="lastName" value="<%= user.lastName %>">
                 </div>
                 <div class="form-group">
                   <label for="username">User Name:</label>
-                  <input type="text" class="form-control" id="username" name="username" value=<%= user.username %>>
+                  <input type="text" class="form-control" id="username" name="username" value="<%= user.username %>">
                 </div>
                 <div class="form-group">
                   <label for="sessionTimeOut">Session TimeOut (Minute):</label>
-                  <input type="text" class="form-control" id="sessionTimeOut" name="sessionTimeOut" value=<%= user.sessionTimeOut %>>
+                  <input type="text" class="form-control" id="sessionTimeOut" name="sessionTimeOut" value="<%= user.sessionTimeOut %>">
                 </div>
                 <div class="form-group">
                   <label for="createdDate">Created Date:</label>
-                  <input type="text" class="form-control" id="createdDate" name="createdDate" readonly value=<%= user.createdDate %>>
+                  <input type="text" class="form-control" id="createdDate" name="createdDate" readonly value="<%= user.createdDate %>">
                 </div>
               </div>
             

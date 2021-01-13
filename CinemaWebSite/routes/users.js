@@ -13,7 +13,8 @@ router.get('/', checkSessionTimeout(), async function(req, res, next) {
     res.render('users/users', { title : "All Users Page", users: users});  
   }
   else{
-    res.send('An error occured while trying to get all users');
+    //res.send('An error occured while trying to get all users');
+    res.render('main', {title: "Main Page", message: `An error occured while trying to get all users`});
   }
 
   

@@ -78,7 +78,6 @@ exports.addMovie = async function(movie){
     }
 }
 
-//add movie to db
 exports.updateMovie = async function(id, movie){
     let updateMovie = null;
     try{
