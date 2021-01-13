@@ -157,11 +157,12 @@ router.get('/delete/:id', checkSessionTimeout(), checkPermissions("Delete Movies
 
 router.get('/:id', checkSessionTimeout(), checkPermissions("View Movies"), async function(req, res, next) {
   let id = req.params.id;
-  let response = await moviesBL.getMovieById(id);
+  let movie = await movieSubscriberBL.getMovieSubscribersById(id);
+
+  let movieSubscribers = [movie];
   
-  if(response.success){
-    let movie = response.movie;
-    res.render('movies/movies', { title : "Movie Page", msg: '', movies : movie});
+  if(movieSubscribers){
+    res.render('movies/movies', { title : "Movie Page", msg: '', moviesSubscribed : movieSubscribers});
   }
   else{
     res.render('main', { title : "Main Page", msg: '', message: `An error occured while try get movie's data. movie's id: ${id}`});

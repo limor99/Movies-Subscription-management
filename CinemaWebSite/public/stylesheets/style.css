@@ -1,19 +1,6 @@
 body {
-  /*
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  color: white!important;
-  background-color: black!important;
+  /* Location of the image */
   background-image: url("/images/cinema.png");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  background-size: auto;
-  max-height: 0;
-
-*/
-
-   /* Location of the image */
-   background-image: url("/images/cinema.png");
   
   /* Background image is centered vertically and horizontally at all times */
   background-position: center center;
@@ -31,13 +18,12 @@ body {
   
   /* Set a background color that will be displayed
      while the background image is loading */
-     background-color: black!important;
-     color: white!important;
-    }
+  background-color: black!important;
+  color: white!important;
+}
 
 a {
   color: white!important;
-  
 }
 
 button{
@@ -53,7 +39,6 @@ select{
 nav{
   background-color: red!important;
 }
-
 
 .central{  
   position: absolute;
@@ -162,11 +147,15 @@ nav{
     flex-direction: row!important;
     padding-top: 0.6rem;
     justify-content: space-between;
+  }
   
-  
+}
+
+@media (max-width: 768px){
+  .unwatch{
+    width: 10.7rem;
   }
 
-  
 }
 
 #header {
@@ -185,21 +174,9 @@ nav{
 }
 
 .menu{
-  
   width: 100%;
   justify-content: space-between;
- /* display: flex;
-  
-  flex-direction: row;
-  background-color: red;
-    list-style: none;
-
-  color: white;*/
-  /*align-content: space-between;*/
-  
-
 }
-
 
 .nav{
   display: flex;
@@ -212,41 +189,15 @@ nav li a{
   color: white!important;
 }
 
-
 .left_nav{
   display: flex;
   flex-direction: column;
 }
 
-.right_nav{
-  
-}
-/*
-.subNavbar{
-  margin-top: 3rem;
-  display: flex;
-}
-
-
-
-
-.subNav{
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  list-style: none;
-  justify-content: space-between;
-}
-*/
-
 .section{
- /* display: flex;
-  justify-content: space-between;
-  width: 20%;*/
   line-height: 2.4rem;
   margin-left: 0.5rem!important;
   margin-top: 2rem;
-  
   
 }
 
@@ -258,8 +209,6 @@ nav li a{
 .find{
   padding-left: 1rem!important;
 }
-
-
 
 .search{
   display: flex;
@@ -277,7 +226,6 @@ nav li a{
 }
 
 .card{
-  /*width: 50%;*/
   background-image: linear-gradient(black, #CAC7C6);
   margin-bottom: 1rem;
   border-top: 1px solid black!important;
@@ -292,27 +240,11 @@ nav li a{
 
 .msg{
   color: red;
-  /*background-color: white;
-  display: inline-block;
-  margin-bottom: 1rem;*/
+ 
 }
 
 /* end global */
 
-/*
-.twoColumns{
-  display: flex;
-  
-}
-
-.columns{
-  width: 50%;
-}
-
-.columns .form-group{
-  width: 60%;
-}
-*/
 /* movies page */ 
 .card-text{
   display: flex;
@@ -341,29 +273,18 @@ nav li a{
 
 /* subscriptions page */
 
-.subscription{
-  display: flex;
-  justify-content: space-between;
-  
-  
-}
-
 .member{
-  width: 40%;
+  margin-bottom: 1rem;
 }
 
 .movieWatched{
   flex-direction: column;
-  width: 60%;
+  
 }
 
 .subscribeMovie{
-  width: 30%;
+  width: 10.4rem;
   margin-bottom: 0.5rem;
-}
-
-.subscribe{
-  margin-top: -0.25rem;
 }
 
 .subscribers{
@@ -373,6 +294,19 @@ nav li a{
 .hide{
   display: none;
 }
+
+.subscriberMovie{
+  margin-left: -1rem;
+}
+
+.subscribeData{
+  display: inline-block;
+}
+
+.subscribe{
+  margin-bottom: 0.25rem;
+}
+
 
 /* end subscriptions */
 

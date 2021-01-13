@@ -15,6 +15,14 @@ exports.getAllMovies = async  function(){
     return moviesSubscribers;
 }
 
+exports.getMovieSubscribersById = async function(movieId){
+    let allMovies = await this.getAllMovies();
+    let movie = allMovies.filter(m => m.movieId === movieId)[0];
+
+    return movie;
+}
+
+
 exports.searchMovie = async function(text){
     let searchMovieResult = await movieBL.searchMovie(text);
     let members = await memberBL.getMembers();

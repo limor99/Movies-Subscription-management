@@ -8,7 +8,7 @@ const checkSessionTimeout = require('../middlewares/checkSessionTimeout');
 const checkPermissions =  require('../middlewares/checkPermissions');
 
 router.get('/', checkSessionTimeout(), checkPermissions("View Subscriptions"), async function(req, res, next) {
-  let subscriptionsMovies =await subscriptionsMoviesBL.getSubscriptionsMovies();
+  let subscriptionsMovies = await subscriptionsMoviesBL.getSubscriptionsMovies();
 
   if(subscriptionsMovies){
     res.render('subscriptions/subscriptions', { title: 'Subscriptions Page' , msg: '', subscriptionsMovies : subscriptionsMovies});
