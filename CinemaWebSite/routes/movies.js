@@ -17,7 +17,7 @@ router.get('/', checkSessionTimeout(), checkPermissions("View Movies"), async fu
     res.render('movies/movies', { title : "Movies Page", msg: '', moviesSubscribed : moviesSubscribed});
   }
   else{
-    res.send('An error occured while trying to get all movies');
+    res.render('main', {title: "Movies Page", message: "An error occured while trying to get all movies"});
   }
   
 });
@@ -41,21 +41,17 @@ router.post('/new/add', checkSessionTimeout(), async function(req, res, next) {
   let answer = await moviesBL.addMovie(newMovie);
   
   if(answer != null){
-    //let movies = await moviesBL.getMovies();
     let moviesSubscribed = await movieSubscriberBL.getAllMovies();
     if(moviesSubscribed){
       res.render('movies/movies', { title : "Movies Page", msg : answer.msg, moviesSubscribed: moviesSubscribed});  
     }
     else{
-      res.send('movie added, but an error occured while trying to get all movie');
+      res.render('main', {title: "Movies Page", message: "Movie added, but an error occured while trying to get all movie"});
     }
   }
   else{
-    //genereal error
-    res.send('An error occured while trying to save the movie');
+    res.render('main', {title: "Movies Page", message: "An error occured while trying to save the movie"});
   }
-  
-
 });
 
 router.post('/update', checkSessionTimeout(), async function(req, res, next) {
@@ -78,7 +74,6 @@ router.post('/update', checkSessionTimeout(), async function(req, res, next) {
 
   let answer = await moviesBL.updateMovie(movie);
 
-
   if(answer != null && answer.success){
     let moviesSubscribed = await movieSubscriberBL.getAllMovies();
     
@@ -86,17 +81,13 @@ router.post('/update', checkSessionTimeout(), async function(req, res, next) {
       res.render('movies/movies', { title : "Movies Page", msg : answer.msg, moviesSubscribed: moviesSubscribed});  
     }
     else{
-      res.send('movie Updated, but an error occured while trying to get all movies');
+      res.render('main', {title: "Movies Page", message: "Movie Updated, but an error occured while trying to get all movies"});
     }
-
   }
   else{
-    //genereal error
-    res.send('An error occured while trying to save the movie');
+    res.render('main', {title: "Movies Page", message: "An error occured while trying to save the movie"});
   }
 
-
-  console.log("end post update")
 });
 
 router.get('/new', checkSessionTimeout(), checkPermissions("Create Movies"), function(req, res, next) {
@@ -119,13 +110,11 @@ router.get('/edit/:id', checkSessionTimeout(), checkPermissions("Update Movies")
       res.render('movies/editMovie', { title : "Movies Page", movie : movie});
     }
     else{
-      res.send(`An error occured while trying to update movie: ${movieId}`);
+      res.render('main', {title: "Movies Page", message: `An error occured while trying to update movie: ${movieId}`});
     }
-
   }
   else{
-    //genereal error
-    res.send('An error occured while trying to get the movie: ${movieId} data');
+    res.render('main', {title: "Movies Page", message: `An error occured while trying to get the movie: ${movieId} data`});
   }
 
 });
@@ -144,13 +133,12 @@ router.get('/delete/:id', checkSessionTimeout(), checkPermissions("Delete Movies
       res.render('movies/movies', { title : "Movies Page", msg : answer2.msg, moviesSubscribed: moviesSubscribed});  
     }
     else{
-      res.send('movie deleted, but an error occured while trying to get all movies');
+      res.render('main', {title: "Movies Page", message: "Movie deleted, but an error occured while trying to get all movies"});
     }
 
   }
   else{
-    //genereal error
-    res.send('An error occured while trying to delete the movie');
+    res.render('main', {title: "Movies Page", message: "An error occured while trying to delete the movie"});
   }
 
 });
@@ -165,7 +153,7 @@ router.get('/:id', checkSessionTimeout(), checkPermissions("View Movies"), async
     res.render('movies/movies', { title : "Movie Page", msg: '', moviesSubscribed : movieSubscribers});
   }
   else{
-    res.render('main', { title : "Main Page", msg: '', message: `An error occured while try get movie's data. movie's id: ${id}`});
+    res.render('main', { title : "Movie Page", message: `An error occured while try get movie's data. movie's id: ${id}`});
   }
   
 });
@@ -179,7 +167,7 @@ router.post('/search', checkSessionTimeout(), checkPermissions("View Movies"), a
     res.render('movies/movies', { title : "Search Result", msg: '', moviesSubscribed : searchResult});
   }
   else{
-    res.send(`An error occured while trying to get movie's search: ${searchText}`);
+    res.render('main', { title : "Movie Page", message: `An error occured while trying to get movie's search: ${searchText}`});
   }
 
 });

@@ -1,6 +1,6 @@
 /**
  * This function check user's session timeout
- * If user not login (session tomeout) go to login page
+ * If user not login (session tomiout) go to login page
   */
 const checkSessionTimeout = function (){
     return function(req, res, next){

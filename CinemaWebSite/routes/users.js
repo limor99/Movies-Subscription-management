@@ -54,11 +54,11 @@ router.post('/new/add', checkSessionTimeout(), async function(req, res, next) {
         res.render('users/users', { title : "All Users Page", users: users});  
       }
       else{
-        res.send('user Updated, but an error occured while trying to get all users');
+        res.render('main', {title: "All Users Page", message: "user Updated, but an error occured while trying to get all users"});
       }
     }
     else{
-      res.send('user not added')
+      res.render('main', {title: "All Users Page", message: "An error occured. user not added"});
     }
   
 });
@@ -101,14 +101,12 @@ router.post('/update', checkSessionTimeout(), async function(req, res, next) {
       res.render('users/users', { title : "All Users Page", users: users});  
     }
     else{
-      res.send('user Updated, but an error occured while trying to get all users');
+      res.render('main', {title: "All Users Page", message: "User updated, but an error occured while trying to get all users"});
     }
   }
   else{
-    res.send('user not updated');
+    res.render('main', {title: "All Users Page", message: "An error occured. user not updated"});
   }
-
-
 });
 
 router.get('/new', checkSessionTimeout(), function(req, res, next) {
@@ -123,10 +121,8 @@ router.get('/edit/:id', checkSessionTimeout(), async function(req, res, next) {
     res.render('users/editUser', { title : "All Users Page", user : user});
   }
   else{
-    res.send(`An error occured while trying to update user: ${userId}`);
+    res.render('main', {title: "All Users Page", message: `An error occured while trying to update user: ${userId}`});
   }
-
-  
 });
 
 router.get('/delete/:id', checkSessionTimeout(), async function(req, res, next){
@@ -138,11 +134,11 @@ router.get('/delete/:id', checkSessionTimeout(), async function(req, res, next){
       res.render('users/users', { title : "All Users Page", users: users});  
     }
     else{
-      res.send('user Deleted, but an error occured while trying to get all users');
+      res.render('main', {title: "All Users Page", message: "User deleted, but an error occured while trying to get all users"});
     }
   }
   else{
-    res.send('user not Deleted, please check all relevant sources: users collection in db, users.json file, permissions.json file');
+    res.render('main', {title: "All Users Page", message: "User not deleted, please check all relevant sources: users collection in db, users.json file, permissions.json file"});
   }
 });
 

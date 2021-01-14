@@ -1,8 +1,7 @@
 /**
  * This function check user's permission for doing action in the system.
  * If user login check his permissions.
- * If user not login (session tomeout) go to login page
- * @param {*} permission 
+  * @param {*} permission 
  */
 const checkPermissions = function (permission){
     return function(req, res, next){

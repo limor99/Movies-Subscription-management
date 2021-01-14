@@ -35,13 +35,12 @@ router.get('/edit/:id', checkSessionTimeout(), checkPermissions("Update Subscrip
       res.render('subscriptions/editMember', { title : "Member Page", member : member});
     }
     else{
-      res.send(`An error occured while trying to update member: ${memberId}`);
+      res.render('main', {title: "Member Page", message: `An error occured while trying to update member: ${memberId}`});
     }
 
   }
   else{
-    //genereal error
-    res.send('An error occured while trying to get the member: ${memberId} data');
+    res.render('main', {title: "Member Page", message: `An error occured while trying to get the member: ${memberId} data`});
   }
 });
 
@@ -65,16 +64,14 @@ router.post('/new/add', async function(req, res, next) {
       res.render('subscriptions/subscriptions', { title : "Subscriptions Page", msg : answer.msg, members: members});  
     }
     else{
-      res.send('member added, but an error occured while trying to get all members');
+      res.render('main', {title: "Member Page", message: "Member added, but an error occured while trying to get all members"});
     }
   }
   else{
-    //genereal error
-    res.send('An error occured while trying to save the member');
+    res.render('main', {title: "Member Page", message: "An error occured while trying to save the member"});
   }
   
 });
-
 
 router.get('/:id', checkPermissions("View Subscriptions"), async function(req, res, next) {
   let member = null;
@@ -89,16 +86,13 @@ router.get('/:id', checkPermissions("View Subscriptions"), async function(req, r
       res.render('subscriptions/member', { title : "Member Page", member : member});
     }
     else{
-      res.send(`An error occured while trying to get data of member: ${memberId}`);
+      res.render('main', {title: "Member Page", message: `An error occured while trying to get data of member: ${memberId}`});
     }
-
   }
   else{
-    //genereal error
-    res.send('An error occured while trying to get the member: ${memberId} data');
+    res.render('main', {title: "Member Page", message: `An error occured while trying to get the member: ${memberId} data`});
   }
 });
-
 
 router.post('/update', async function(req, res, next) {
   let memberId = req.body.id;
@@ -122,14 +116,12 @@ router.post('/update', async function(req, res, next) {
       res.render('subscriptions/subscriptions', { title: 'Subscriptions Page' , msg: answer.msg, subscriptionsMovies : subscriptionsMovies});
     }
     else{
-      res.send('member Updated, but an error occured while trying to get all members with there subscribed movies');
+      res.render('main', {title: "Member Page", message: "Member Updated, but an error occured while trying to get all members with there subscribed movies"});
     }
   }
   else{
-    //genereal error
-    res.render('error', {message: 'An error occured while trying to save the member', page: "subscriptions"});
+    res.render('main', {title: "Member Page", message: "An error occured while trying to save the member"});
   }
-
 });
 
 router.get('/delete/:id', checkPermissions("Delete Subscriptions"), async function(req, res, next) {
@@ -143,15 +135,12 @@ router.get('/delete/:id', checkPermissions("Delete Subscriptions"), async functi
       res.render('subscriptions/subscriptions', { title : "Members Page", msg : answer.msg, members: members});  
     }
     else{
-      res.send('member deleted, but an error occured while trying to get all members');
+      res.render('main', {title: "Member Page", message: "Member deleted, but an error occured while trying to get all members"});
     }
-
   }
   else{
-    //genereal error
-    res.render('error', {message: 'An error occured while trying to delete the member', page: "subscriptions"});
+    res.render('main', {title: "Member Page", message: "An error occured while trying to delete the member"});
   }
-
 });
 
 router.post("/subscribe", async function(req, res, next){
@@ -174,18 +163,16 @@ router.post("/subscribe", async function(req, res, next){
         res.render('subscriptions/subscriptions', { title : "Subscriptions Page", msg : answer.msg, subscriptionsMovies: subscriptionsMovies});  
       }
       else{
-        res.render('main', {title: "Main Page", message: `An error occured while try get members's subscriptions`});
+        res.render('main', {title: "Member Page", message: `An error occured while try get members's subscriptions`});
       }
     }
     else{
-      res.render('main', {title: "Main Page", message: `An error occured while try to add subscriptions to movie ${subscribeMovieId} to user ${memberId}`});
+      res.render('main', {title: "Member Page", message: `An error occured while try to add subscriptions to movie ${subscribeMovieId} to user ${memberId}`});
     }
   }
   else{
-    //genereal error
-    res.render('error', {message: `An error occured while try to add subscriptions to movie ${subscribeMovieId} to user ${memberId}`, page: "subscriptions"});
+    res.render('main', {title: "Member Page", message: `An error occured while try to add subscriptions to movie ${subscribeMovieId} to user ${memberId}`});
   }
-
 })
 
 module.exports = router;
