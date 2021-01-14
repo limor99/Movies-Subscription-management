@@ -214,11 +214,6 @@ nav li a{
   display: flex;
 }
 
-.searchText{
-  width: 50%;
-  margin-right: 0.5rem;
-}
-
 /* global for all pages */
 .content{
   margin: 0 2.5rem;
@@ -232,11 +227,6 @@ nav li a{
   border-left: 1px solid red!important;
 
 }
-
-.addForm, .editForm{
-  padding-bottom: 1rem;
-}
-
 
 .msg{
   color: red;
@@ -273,10 +263,6 @@ nav li a{
 
 /* subscriptions page */
 
-.member{
-  margin-bottom: 1rem;
-}
-
 .movieWatched{
   flex-direction: column;
   
@@ -285,10 +271,6 @@ nav li a{
 .subscribeMovie{
   width: 10.4rem;
   margin-bottom: 0.5rem;
-}
-
-.subscribers{
-  margin-top: 0.5rem;
 }
 
 .hide{
@@ -302,11 +284,6 @@ nav li a{
 .subscribeData{
   display: inline-block;
 }
-
-.subscribe{
-  margin-bottom: 0.25rem;
-}
-
 
 /* end subscriptions */
 

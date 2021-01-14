@@ -43,7 +43,7 @@
       <% subscriptionsMovies.forEach(sm =>{ %>
         <div class="card">
           <div class="card-body row">
-            <div class="member col-md-4">
+            <div class="mb-3 col-md-4">
               <input type="hidden" name="memberId" value="<%= sm.id  %>">
               <h5 class="card-title"><%= sm.name %></h5>
               <p class="card-text">Email: <%= sm.email %></p>
@@ -77,12 +77,12 @@
                         <input type="date" name="watchedDate">
                       </div>
                       <div class="subscribeData mb-2">
-                        <button type="submit" class="btn btn-primary btn-sm subscribe">Subscribe</button>
+                        <button type="submit" class="btn btn-primary btn-sm mb-1">Subscribe</button>
                       </div>
                     </div>
                   </form>
               </div>
-              <div class="subscribers">
+              <div class="mt-2">
                 <ul>
                   <% sm.movies.forEach(m =>{ %>
                     <li class="subscriberMovie"><a href="/movies/<%= m.movieId %>"><%= m.movieName %></a>, <%= (new Date(m.watchDate)).toLocaleDateString('en-Gb') %></li>
