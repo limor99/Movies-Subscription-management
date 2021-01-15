@@ -26,7 +26,7 @@
     <div class="container-fluid">
       <div class="row section">
         <div class="col-md-4">
-          <div class="allTitle">
+          <div class="mr-5 d-inline">
             <b>all Member</b>
           </div>
 
@@ -46,8 +46,8 @@
             <div class="mb-3 col-md-4">
               <input type="hidden" name="memberId" value="<%= sm.id  %>">
               <h5 class="card-title"><%= sm.name %></h5>
-              <p class="card-text">Email: <%= sm.email %></p>
-              <p class="card-text">City: <%= sm.city %></p>
+              <p class="d-flex mb-3">Email: <%= sm.email %></p>
+              <p class="d-flex mb-3">City: <%= sm.city %></p>
 
               <button class="btn btn-primary">
                 <a href="/subscriptions/edit/<%= sm.id %>">Edit</a>
@@ -56,7 +56,7 @@
                 <a href="/subscriptions/delete/<%= sm.id %>">Delete</a>
               </button>
             </div>
-            <div class="card-text movieWatched col-md-8">
+            <div class="d-flex mb-3 movieWatched col-md-8">
               <h6>Movie Watched</h6>
               <button class="btn btn-primary btn-sm subscribeMovie" onclick=subscribeToMovie("<%= sm.id  %>")>Subscribe to new movie</button>
               <div class="hide" id="hide_<%= sm.id %>">
@@ -65,7 +65,7 @@
                    <input type="hidden" name="memberId" value="<%= sm.id %>"/>
 
                     <div>
-                      <div class="subscribeData mb-2">
+                      <div class="d-inline-block mb-2">
                         <select class="unwatch" name="unwatch" id="unwatch">
                           <% sm.unwatched.forEach(uw =>{ %>
                             <option value="<%= uw._id %>"><%= uw.name %></option>
@@ -73,10 +73,10 @@
                           <% })  %>
                         </select>
                       </div>
-                      <div class="subscribeData mb-2">
+                      <div class="d-inline-block mb-2">
                         <input type="date" name="watchedDate">
                       </div>
-                      <div class="subscribeData mb-2">
+                      <div class="d-inline-block mb-2">
                         <button type="submit" class="btn btn-primary btn-sm mb-1">Subscribe</button>
                       </div>
                     </div>

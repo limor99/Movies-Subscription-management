@@ -11,7 +11,7 @@
     <div class="container-fluid">
       <div class="row section">
         <div class="col-md-4">
-          <div class="allTitle">
+          <div class="mr-5 d-inline">
             <b>all movies</b>
           </div>
 
@@ -41,8 +41,8 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title"><%= ms.movieName %>, <%= (new Date(ms.moviePremiered)).toLocaleDateString('en-GB') %></h5>
-          <p class="card-text">genres: <%= ms.movieGenres %></p>
-          <div class="card-text">
+          <p class="d-flex mb-3">genres: <%= ms.movieGenres %></p>
+          <div class="d-flex mb-3">
             <div>
               <img src="<%= ms.movieImage %>" style="width:5rem"/>
             </div>

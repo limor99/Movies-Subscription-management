@@ -201,11 +201,6 @@ nav li a{
   
 }
 
-.allTitle{
-  margin-right: 3rem;
-  display: inline;
-}
-
 .find{
   padding-left: 1rem!important;
 }
@@ -236,10 +231,6 @@ nav li a{
 /* end global */
 
 /* movies page */ 
-.card-text{
-  display: flex;
-  margin-bottom: 1rem;
-}
 
 .watched{
   margin-left: 5rem;

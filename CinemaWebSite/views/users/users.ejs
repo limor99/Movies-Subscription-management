@@ -10,7 +10,7 @@
     <div class="container-fluid">
       <div class="row section">
         <div class="col-md-4">
-          <div class="allTitle">
+          <div class="mr-5 d-inline">
             <b>all Users</b>
           </div>
 
@@ -27,10 +27,10 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Name: <%= user.firstName %> <%= user.lastName %></h5>
-            <p class="card-text">User Name: <%= user.username %></p>
-            <p class="card-text">Session Time Out: <%= user.sessionTimeOut %></p>
-            <p class="card-text">Created Date: <%= user.createdDate %></p>
-            <p class="card-text">Permissions: <%= user.permissions %></p>
+            <p class="d-flex mb-3">User Name: <%= user.username %></p>
+            <p class="d-flex mb-3">Session Time Out: <%= user.sessionTimeOut %></p>
+            <p class="d-flex mb-3">Created Date: <%= user.createdDate %></p>
+            <p class="d-flex mb-3">Permissions: <%= user.permissions %></p>
             <button class="btn btn-primary">
               <a href="/users/edit/<%= user.id %>">Edit</a>
             </button>
