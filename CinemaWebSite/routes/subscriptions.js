@@ -59,9 +59,10 @@ router.post('/new/add', async function(req, res, next) {
   let answer = await membersBL.addMember(newMember);
   
   if(answer != null){
-    let members = await membersBL.getMembers();
-    if(members){
-      res.render('subscriptions/subscriptions', { title : "Subscriptions Page", msg : answer.msg, members: members});  
+    let subscriptionsMovies = await subscriptionsMoviesBL.getSubscriptionsMovies();
+
+    if(subscriptionsMovies){
+      res.render('subscriptions/subscriptions', { title: 'Subscriptions Page' , msg: answer.msg, subscriptionsMovies : subscriptionsMovies});
     }
     else{
       res.render('main', {title: "Member Page", message: "Member added, but an error occured while trying to get all members"});
@@ -130,9 +131,10 @@ router.get('/delete/:id', checkPermissions("Delete Subscriptions"), async functi
   let answer = await membersBL.deleteMember(memberId);
 
   if(answer != null){
-    let members = await membersBL.getMembers();
-    if(members){
-      res.render('subscriptions/subscriptions', { title : "Members Page", msg : answer.msg, members: members});  
+    let subscriptionsMovies = await subscriptionsMoviesBL.getSubscriptionsMovies();
+
+    if(subscriptionsMovies){
+      res.render('subscriptions/subscriptions', { title: 'Subscriptions Page' , msg: answer.msg, subscriptionsMovies : subscriptionsMovies});
     }
     else{
       res.render('main', {title: "Member Page", message: "Member deleted, but an error occured while trying to get all members"});
