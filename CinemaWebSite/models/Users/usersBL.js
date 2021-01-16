@@ -143,7 +143,6 @@ exports.updateUser = async function(updateUser){
     if(users){
         let index = users.findIndex(user => user.id === userToUpdate.id);
         users[index] = userToUpdate;
-        console.table(users);
         isUpdateUser = await userDal.writeUsersToFile(users);
         
         let userPermissionsToUpdate = {
